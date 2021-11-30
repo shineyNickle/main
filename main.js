@@ -22,7 +22,7 @@ store.set('settings.user_agent', 'Holla');
 if (!store.get('userAgent')) {
 store.set('userAgent', [
 { name: 'Electron', url: '' },
-{ name: 'Holla', url: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) AppleWebKit/537.36 (KHTML, like Gecko/20100101) Firefox/92.0 Chrome/87.0.4280.141 Safari/537.36' },
+{ name: 'Nickel', url: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) AppleWebKit/537.36 (KHTML, like Gecko/20100101) Firefox/92.0 Chrome/87.0.4280.141 Safari/537.36' },
 //{ name: 'Holla', url: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) AppleWebKit/537.36 KHTML, like Gecko/20100101 Firefox/92.0 Safari/537.36' },
 { name: 'Firefox', url: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0' },
 { name: 'Opera', url: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 OPR/78.0.4093.184' },
