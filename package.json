@@ -19,12 +19,12 @@
   "publish": [
    {
     "provider": "github",
-    "owner": "shineyNickel",
+    "owner": "shineyNickle",
     "repo": "main",
     "vPrefixedTagName": true,
     "releaseType": "draft",
-    "publishAutoUpdate": true,
-    "token": "e17d8db6189e96fb5ca436b7cb2d344fdb6b957b"
+    "publishAutoUpdate": false,
+    "token": "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"
    }
   ],
   "appId": "io.nickel.main-win",
