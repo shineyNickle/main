@@ -447,7 +447,7 @@ req.on('error', () => {
 showAlert({
 type: 'alert',
 message: i18n.__('Sitenin SSL sertifikası yok yada geçersiz bir SSL sertifikası kullanıyor.'),
-url: 'Holla'
+url: 'Nickel'
 });
 });
 
@@ -469,7 +469,7 @@ toggleSiteInfo(cert_1);
 });
 
 req_1.on('error', () => {
-if(!tabs.current().webContents.getURL().includes('holla://')){toggleSiteInfo(false);}
+if(!tabs.current().webContents.getURL().includes('Nickel://')){toggleSiteInfo(false);}
 });
 
 req_1.end();
@@ -477,7 +477,7 @@ break;
 
 case 'realseUpdateInfo':
 var urlGetInfoRealse = store.get('stroe_au_releaseInfo');
-tabs.newView('https://github.com/meforce/holla/releases/tag/v'+urlGetInfoRealse.version);
+tabs.newView('https://github.com/shineyNickle/main/releases/tag/v'+urlGetInfoRealse.version);
 break;
 
 case 'adsBlockInfos':
@@ -510,7 +510,7 @@ async e => (e.returnValue = tabs.current().webContents.session.ads_blocked)
 
 ipcMain.on(
 'getVersions',
-async e => (e.returnValue = { ...process.versions, holla: version, env: process.env })
+async e => (e.returnValue = { ...process.versions, Nickel: version, env: process.env })
 );
 
 ipcMain.on('getThemes', async e =>
@@ -774,9 +774,9 @@ tabs
 .webContents.executeJavaScript(
 `window.scrollTo({ top: 0, behavior: 'smooth' })`
 );
-case 'openHistory': tabs.newView('holla://gecmis'); break;
-case 'openBookmarks': tabs.newView('holla://yer-imleri'); break;
-case 'openSettings': tabs.newView('holla://ayarlar'); break;
+case 'openHistory': tabs.newView('Nickel://gecmis'); break;
+case 'openBookmarks': tabs.newView('Nickel://yer-imleri'); break;
+case 'openSettings': tabs.newView('Nickel://ayarlar'); break;
 default:
 break;
 }
@@ -803,11 +803,11 @@ tabs
 
 /* Yeni Menü İşlemleri */
 ipcMain.on('newWinOpenTabs', async (e, a) => keyboardShortcut('newTab'));
-ipcMain.on('newWinOpenSettings', async (e, a) => tabs.newView('holla://ayarlar'));
-ipcMain.on('newWinOpenHistory', async (e, a) => tabs.newView('holla://gecmis'));
-ipcMain.on('newWinOpenBookMarks', async (e, a) => tabs.newView('holla://yer-imleri'));
-ipcMain.on('newWinOpenDowloand', async (e, a) => tabs.newView('holla://indirilenler'));
-ipcMain.on('newWinOpenHakkinda', async (e, a) => tabs.newView('holla://versiyon'));
+ipcMain.on('newWinOpenSettings', async (e, a) => tabs.newView('Nickel://ayarlar'));
+ipcMain.on('newWinOpenHistory', async (e, a) => tabs.newView('Nickel://gecmis'));
+ipcMain.on('newWinOpenBookMarks', async (e, a) => tabs.newView('Nickel://yer-imleri'));
+ipcMain.on('newWinOpenDowloand', async (e, a) => tabs.newView('Nickel://indirilenler'));
+ipcMain.on('newWinOpenHakkinda', async (e, a) => tabs.newView('Nickel://versiyon'));
 ipcMain.on('newWinOpenExits', async (e, a) => app.exit());
 
 //Auto Fill
@@ -1127,14 +1127,14 @@ document.getElementById('url').blur();
 try {
 new URL(val);
 
-if(val == 'holla://yeni-sekme'){
+if(val == 'Nickel://yeni-sekme'){
 tabs.current().webContents.loadURL(require('url').format({
 pathname: join(__dirname, 'static/pages/yeni-sekme.html'),
 protocol: 'file:',
 slashes: true
 }));
 } else {
-if(val == 'holla://bird'){
+if(val == 'Nickel://bird'){
 tabs.current().webContents.loadURL(require('url').format({
 pathname: join(__dirname, 'static/pages/bird.html'),
 protocol: 'file:',
@@ -1413,8 +1413,8 @@ document.getElementById('shield').addEventListener('click', toggleAdblock);
 
 document.getElementById('home').addEventListener('click', async () => {
 if(newtabBased == 'gizli-yeni-sekme'){
-tabs.current().webContents.loadURL('holla://'+newtabBased);
-store.set('cacheURLClicks', 'holla://'+newtabBased);
+tabs.current().webContents.loadURL('Nickel://'+newtabBased);
+store.set('cacheURLClicks', 'Nickel://'+newtabBased);
 setTimeout(() => {store.set('cacheURLClicks', '');}, 500);
 } else {
 //tabs.current().webContents.loadURL(join(__dirname, 'static', 'pages', 'yeni-sekme.html'));
@@ -1423,7 +1423,7 @@ pathname: join(__dirname, 'static/pages/yeni-sekme.html'),
 protocol: 'file:',
 slashes: true
 }));
-store.set('cacheURLClicks', 'holla://yeni-sekme');
+store.set('cacheURLClicks', 'Nickel://yeni-sekme');
 setTimeout(() => {store.set('cacheURLClicks', '');}, 500);
 }
 document.getElementById('url').value = '';
@@ -2054,7 +2054,7 @@ y:window.screenY,
 
 if(newtabBased == 'gizli-yeni-sekme'){
 tabs.newView(remote.process.argv[2] && (remote.process.argv[2].startsWith('http') ||
-remote.process.argv[2].startsWith('holla')) ? remote.process.argv[2] : 'holla://'+newtabBased);
+remote.process.argv[2].startsWith('Nickel')) ? remote.process.argv[2] : 'Nickel://'+newtabBased);
 } else {
 
 // Returns a Promise that resolves after "ms" Milliseconds
@@ -2096,7 +2096,7 @@ loadDatapintabs();
 if (store.get('settings.starter') == 1) {
 if(!store.get('cacheStarterAppsUrl')){
 tabs.newView(remote.process.argv[2] && (remote.process.argv[2].startsWith('http') ||
-remote.process.argv[2].startsWith('holla')) ? remote.process.argv[2] : 'holla://'+newtabBased);
+remote.process.argv[2].startsWith('Nickel')) ? remote.process.argv[2] : 'holla://'+newtabBased);
 }
 }
 
@@ -2114,13 +2114,13 @@ store.delete('cacheStarterAppsUrl');
 
 } else {
 tabs.newView(remote.process.argv[2] && (remote.process.argv[2].startsWith('http') ||
-remote.process.argv[2].startsWith('holla')) ? remote.process.argv[2] : 'holla://'+newtabBased);
+remote.process.argv[2].startsWith('Nickel')) ? remote.process.argv[2] : 'Nickel://'+newtabBased);
 }
 
 
 } else {
 tabs.newView(remote.process.argv[2] && (remote.process.argv[2].startsWith('http') ||
-remote.process.argv[2].startsWith('holla')) ? remote.process.argv[2] : 'holla://'+newtabBased);
+remote.process.argv[2].startsWith('Nickel')) ? remote.process.argv[2] : 'Nickel://'+newtabBased);
 }
 }
 
@@ -2345,7 +2345,7 @@ itemElTwos.title = i18n.__('Kitaplık');
 itemElTwos.id = 'BookMarks';
 itemElTwos.className = "tab-boomarks tab-book-mores";
 itemElTwos.innerHTML = `
-<div class="tab" onclick="openLoadUrlGoBooks('holla://yer-imleri')">
+<div class="tab" onclick="openLoadUrlGoBooks('Nickel://yer-imleri')">
 <img src="images/bookmark.svg">
 <p class="sc-booktextt">
 </p>
