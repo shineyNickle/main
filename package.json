@@ -27,8 +27,8 @@
     "token": "e17d8db6189e96fb5ca436b7cb2d344fdb6b957b"
    }
   ],
-  "appId": "io.holla.meforce-win",
-  "productName": "Holla",
+  "appId": "io.nickel.main-win",
+  "productName": "Nickel",
   "directories": {
    "buildResources": "build"
   },
