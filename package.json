@@ -67,14 +67,14 @@
   },
   "fileAssociations": [
    {
-    "name": "Holla HTML Document",
-    "description": "Holla",
+    "name": "Nickel HTML Document",
+    "description": "Nickel",
     "ext": "html",
     "icon": "../images/holla.ico"
    },
    {
-    "name": "Holla WebP Image",
-    "description": "Holla WebP Image",
+    "name": "Nickel WebP Image",
+    "description": "Nickel WebP Image",
     "ext": "webp",
     "icon": "../images/holla.ico"
    }
@@ -86,7 +86,7 @@
   "build-win": "electron-builder --win --publish never",
   "build-mac": "electron-builder --mac --publish always"
  },
- "author": "Mert Çetin <mertcetin.official@gmail.com>",
+ "author": "Malikye ",
  "license": "MIT",
  "devDependencies": {
   "electron": "github:meforce/electron#11.5.0-wvvmp",
