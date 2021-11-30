@@ -1,0 +1,60 @@
+#navbar {
+background: #35363A !important;
+color: white;
+}
+
+#menusleftbar {
+background-color: #202124 !important;
+border-right: solid 1px #5d5d5d;
+}
+#menu-items {
+padding-left: 0px !important;
+}
+#speact {
+background: #35363A !important;
+}
+#menu-items button:hover { background-color: #2d2d2d !important; opacity: 1; }
+
+#menu-items .xsvg-iconsss{
+filter: brightness(0) invert(1);
+}
+
+.newBookmarksAlss {
+background: #202124 !important;
+}
+#titlebar {
+background: #202124 !important;
+}
+.tab.selected {
+background: #35363A !important;
+color: white;
+}
+.tab-label {
+color: white !important;
+}
+.tab-close {
+filter: brightness(0) invert(1);
+}
+.tab {
+border-right: solid 1px rgb(37 37 37 / 42%) !important;
+}
+#back, #forward, #refresh, #home, #site-info img, #bookmark, #shield, #menu, #system_update, #new-tab, #window-controls svg, #BookMarks img {
+filter: brightness(0) invert(1);
+}
+
+.newBookmarksAlss .tab-boomarks:hover{background: #2d2d2d !important;}
+
+.sc-booktextt {color:white;}
+.tab-boomarks .tab {
+border-right: solid 1px rgb(99 99 99 / 42%) !important;
+}
+#nav-center {
+background: #202124 !important;
+box-shadow: inset 1px -1px 0px 0px #272727, inset -1px 1px 0px 0px #1d1d1d !important;
+}
+
+#url {
+color: #e6e6e6 !important;
+}
+
+#url::-webkit-input-placeholder { color: #e6e6e6; opacity: 0.35; }

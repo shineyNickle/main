@@ -1,0 +1,319 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style>
+.vpn{
+background: white;
+margin: 0;
+padding: 0;
+}
+</style>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<link href="assets://css/settings/style.css" rel="stylesheet" type="text/css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+font-family: 'Roboto', sans-serif !important;
+}
+#softhakkinda a { font-weight: 600; }
+#sfotGuncelssx{
+color: #ffffff;
+background: #4CAF50;
+padding: 15px 20px;
+border-radius: 25px;
+margin: 0 auto;
+}
+#sfotGuncelssDegilx{
+color: #ffffff;
+background: #F44336;
+padding: 15px 20px;
+border-radius: 25px;
+margin: 0 auto;
+}
+
+.epMHXf{display: flex;}
+
+.jInefD{border: none; margin-bottom: 10px;}
+
+.mspings{
+border-radius: 50%;
+border: solid 1px #03A9F4;
+color: #03A9F4;
+padding: 35px 25px;
+}
+</style>
+</head>
+<body id="vpn" class="vpn vnoWidget">
+<div id="app" style="padding: 15px;height: 92vh;border: solid 1px rgb(0 0 0 / 7%); overflow: hidden;">
+<div class="sc-1o7hk0x gOQaAa" style="height: 92vh;flex: initial;    width: 100%;overflow: hidden;">
+
+<!-- Başlangıçta Ayarları Bölümü 2 -->
+<div id="content-views-2" class="sc-chz44j gKsQAm" style="height: 92vh;flex: initial; width: 100%; overflow: hidden;"> 
+<div class="sc-frx3vm kTSEYd" style="max-width: 100%;margin: 0;    width: 100%;">
+<div class="sc-ct0163 ikMuiC" style="text-align: center;display: block;">Holla VPN</div>
+
+<div id="vpndataadd"></div>
+
+<div class="sc-l5yqk8 jInefD" onclick="vpnproxyopend()">
+<div class="sc-v03tst epMHXf" style="opacity: 0; width: 0;" id="c1"><i18n>VPN Disconnected</i18n></div>
+<div class="sc-v03tst epMHXf" style="opacity: 0; width: 0;" id="c2"><i18n>VPN Connecting...</i18n></div>
+<div class="sc-v03tst epMHXf" style="opacity: 0; width: 0;" id="c3"><i18n>VPN Connected</i18n></div>
+
+<div class="sc-ur64yn gINTBr" id="openclosevpn">
+<input id="openclosevpninput" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+
+<div class="sc-l5yqk8 jInefD" >
+<div class="sc-v03tst epMHXf" style="display: block;margin: 0 auto;margin-top: -8px;margin-bottom: 8px;">
+<div id="mspings" class="mspings">0 MS</div>
+</div>
+</div>
+
+
+<div class="sc-l5yqk8 jInefD" style="display: block;">
+<div class="sc-v03tst epMHXf" style="display: block;padding-bottom: 10px;"><i18n>Virtual Location</i18n></div>
+<div class="sc-ur64yn gINTBr" onclick="openPopupModals('search-engine', '')">
+<div class="sc-1e1ni75 fJBUt dropdown" id="search_engine">
+<div class="sc-1vdgtvd vluxh" id="search_engine-text"></div>
+<div class="sc-l9161m bcTtwB"></div>
+<div class="sc-k9lbpp QeBUP" id="search-engine" style="top: -180px; width: 100%; display: none; box-shadow: none;">
+</div>
+</div>
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>IP Adress:</i18n></div>
+<div class="sc-ur64yn gINTBr" id="ipadres">
+</div>
+</div>
+
+
+</div>
+</div>
+
+</div>
+</div>
+<div onclick="closeEventBodyAll()" id="closedEventAd" style="display: none; width: 100%;height: 100%;background: rgb(10 10 10 / 22%);position: fixed;z-index: 9;top: 0;left: 0;right: 0;bottom: 0;"></div>
+</body>
+<script type="text/javascript">
+let { ipcRenderer, remote } = require('electron');
+var sendSync = ipcRenderer.sendSync;
+var send = ipcRenderer.send;
+
+var i18n = new(require('../../../translations/i18n'));
+
+window.addEventListener('load', async e => {
+
+//Dil Çeviri Yap
+var i18nTitle = document.getElementById("i18n");
+if(i18nTitle){ i18nTitle.innerHTML = i18n.__(i18nTitle.innerHTML); }
+
+[].forEach.call(document.getElementsByClassName("i18n"),function(el){ 
+if(el.placeholder){ el.placeholder = i18n.__(el.placeholder); }
+if(el.title){ el.title = i18n.__(el.title); }
+});
+
+[].forEach.call(document.getElementsByTagName("i18n"),function(el){ 
+var keyslo = el.innerHTML;
+el.innerHTML = i18n.__(keyslo);
+el.style.display = 'block';
+});
+
+});
+
+/* Tema Çek Yükle */
+function xloadThemes(){
+const theme = sendSync('getTheme');
+if(theme){ themeObj = theme.toLowerCase(); }/*
+if (document.querySelector('head link[href*="assets://themes"]')) document.querySelector('head link[href*="assets://themes"]').remove();
+document.head.innerHTML += '<link rel="stylesheet" href="assets://themes/'+themeObj+'.css">';*/
+}
+xloadThemes();
+/* Tema Çek Yükle Son */
+
+/* Ön Bellekten Vpn Verileri Getir */
+const vpndata = sendSync('vpndata').map(e => e);
+
+/* Belirli Bir Div İçine Verileri Çek Yükle */
+function loadDataEngines(oneID,twoID,theFuc){
+let panelEl = document.getElementById(oneID);
+let options = vpndata.map(op => `<div class="sc-1k8lovv hJBLHH" onclick="${theFuc}('${op.connection}', '${op.co} &nbsp;-&nbsp; ${op.ip}', '${twoID}')">${op.co} &nbsp;-&nbsp; ${op.ip}</div>`).join('\n');
+panelEl.innerHTML += `${ options }`;
+}
+
+/* Arama Motorlarını Çek */
+loadDataEngines('search-engine','search_engine-text','prossSearchEngines');
+
+/* Arama Motoru Değiştirme İşlemi */
+function prossSearchEngines(eValue, eText, idElementxText){
+var elementIdTextBul = document.getElementById(idElementxText);
+if(elementIdTextBul){
+elementIdTextBul.innerHTML = eText; 
+send('changevpn', eValue);
+
+if(sendSync('vpnproxyopendstatus')){
+document.getElementById('mspings').innerHTML = '<img style="width:20px;" src="assets://images/loader.gif">';
+loadIpAdress();
+
+var c3 = document.getElementById('c3');
+c3.style.width = '0'; c3.style.opacity = '0';
+var c1 = document.getElementById('c1');
+c1.style.width = '0'; c1.style.opacity = '0';
+
+var c2 = document.getElementById('c2');
+c2.style.width = '100%'; c2.style.opacity = '1';
+
+ping(sendSync('vpnproxyip'), function(m){ 
+document.getElementById('mspings').innerHTML = m+' ms';
+var c2 = document.getElementById('c2');
+c2.style.width = '0'; c2.style.opacity = '0';
+var c3 = document.getElementById('c3');
+c3.style.width = '100%'; c3.style.opacity = '1';
+});
+
+}
+
+}
+}
+
+function prossSearchEnginesTextLoad(idElementxText){
+const vpndatatext = sendSync('vpnproxyip');
+var elementIdTextBul = document.getElementById(idElementxText);
+if(elementIdTextBul){
+elementIdTextBul.innerHTML = vpndatatext; 
+}
+}
+prossSearchEnginesTextLoad('search_engine-text');
+
+function vpnproxyopend(){
+if(sendSync('vpnproxyopendstatus')){
+document.getElementById('mspings').innerHTML = '0 ms';
+document.getElementById('openclosevpninput').checked = false;
+var c1 = document.getElementById('c1');
+c1.style.width = '100%'; c1.style.opacity = '1';
+var c2 = document.getElementById('c2');
+c2.style.width = '0'; c2.style.opacity = '0';
+var c3 = document.getElementById('c3');
+c3.style.width = '0'; c3.style.opacity = '0';
+} else{
+document.getElementById('openclosevpninput').checked = true;
+document.getElementById('mspings').innerHTML = '<img style="width:17px;" src="assets://images/loader.gif">';
+
+
+var c1 = document.getElementById('c1');
+c1.style.width = '0'; c1.style.opacity = '0';
+
+var c2 = document.getElementById('c2');
+c2.style.width = '100%'; c2.style.opacity = '1';
+
+ping(sendSync('vpnproxyip'), function(m){ 
+document.getElementById('mspings').innerHTML = m+' ms';
+var c2 = document.getElementById('c2');
+c2.style.width = '0'; c2.style.opacity = '0';
+var c3 = document.getElementById('c3');
+c3.style.width = '100%'; c3.style.opacity = '1';
+});
+
+
+}
+
+send('vpnproxyopend');
+loadIpAdress();
+}
+
+function loadIpAdress(){
+$.getJSON('https://api.ipify.org?format=jsonp&callback=?', (data)=> {
+//console.log(JSON.stringify(data, null, 2)); 
+if(data.ip){
+document.getElementById('ipadres').innerHTML = data.ip;} else {
+document.getElementById('ipadres').innerHTML = 'This Network Is Unavailable';
+}
+}).fail(function() { document.getElementById('ipadres').innerHTML = 'This Network Is Unavailable'; });
+
+
+if(!sendSync('vpnproxyopendstatus')){
+var c1 = document.getElementById('c1');
+c1.style.width = '100%'; c1.style.opacity = '1';
+var c2 = document.getElementById('c2');
+c2.style.width = '0'; c2.style.opacity = '0';
+var c3 = document.getElementById('c3');
+c3.style.width = '0'; c3.style.opacity = '0';
+}
+}
+
+
+/* Sayfa Yüklendi */
+window.addEventListener('load', async e => {
+if(sendSync('vpnproxyopendstatus')){
+document.getElementById('openclosevpninput').checked = true;
+document.getElementById('mspings').innerHTML = '<img style="width:20px;" src="assets://images/loader.gif">';
+
+var c1 = document.getElementById('c1');
+c1.style.width = '0'; c1.style.opacity = '0';
+var c2 = document.getElementById('c2');
+c2.style.width = '100%'; c2.style.opacity = '1';
+
+ping(sendSync('vpnproxyip'), function(m){ 
+document.getElementById('mspings').innerHTML = m+' ms';
+c2.style.width = '0'; c2.style.opacity = '0';
+var c3 = document.getElementById('c3');
+c3.style.width = '100%'; c3.style.opacity = '1';
+});
+}
+loadIpAdress();
+});
+
+
+function ping(hostport, pong) {
+var started = new Date().getTime();
+var http = new XMLHttpRequest();
+// "http://" + hostport
+http.open("GET", "https://yandex.com/", /*async*/true);
+http.onreadystatechange = function() {
+if (http.readyState == 4) {
+var ended = new Date().getTime();
+var milliseconds = ended - started;
+
+if (pong != null) {
+pong(milliseconds);
+}
+}
+};
+try {
+http.send(null);
+} catch(exception) {
+// this is expected
+}
+}
+
+
+
+/* Select Gibi Yeni Modal Pencere Aç */
+function openPopupModals(idElementx,closeEvents){
+var elementIdBul = document.getElementById(idElementx);
+var elementIdCloseEv = document.getElementById('closedEventAd');
+
+if(elementIdBul){ 
+var displayElements = elementIdBul.style;
+if(!closeEvents){
+if(displayElements.display == 'none'){
+displayElements.display = "block";
+elementIdCloseEv.style.display = "block";
+} else { 
+displayElements.display = "none"; 
+elementIdCloseEv.style.display = "none";
+}
+} else { if(displayElements.display == 'block'){ displayElements.display = "none"; elementIdCloseEv.style.display = "none"; } }
+}
+}
+
+/* Açık Select Gibi Olan Modalları Kapat */
+function closeEventBodyAll(){
+openPopupModals('search-engine',true);
+}
+
+</script>
+</html>

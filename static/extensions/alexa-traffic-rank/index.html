@@ -1,0 +1,32 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style>
+.Extension header {background-color: #1b334b;padding: 10px 20px;box-sizing: border-box;color: #fff;display: flex;justify-content: space-between;vertical-align: text-top;border-bottom: solid 1px #e8e8e8;}
+</style>
+</head>
+<body style="background: #ffffff;height: 365px;overflow: hidden;width: 400px;display: flex;border: solid 1px rgb(218 220 224 / 29%) !important;margin: 0;padding: 7px;" data-cache-prefix="https://www.alexa.com/alx-sa-3313683b-1630430065" id="Extension" class="Extension  noWidget">
+<!--<div style="width: 400px;height: 350px !important;margin: 0;padding: 0;" id="ifamoduless"></div>-->
+</body>
+<script type="text/javascript">
+let { ipcRenderer, remote } = require('electron');
+let url = ipcRenderer.sendSync('getCurrentURLTabss');
+var hostname = (new URL(url)).hostname;
+let newurl = `https://www.alexa.com/minisiteinfo/${hostname}?offset=5&version=alxg_20100607`;
+
+$.get(newurl, function(data,status,xhr){
+let styleCustom2 = '<style>html{background: rgb(255 255 255 / 1%) !important;} #alx_traffic{width: 100%;position: initial !important;} body{display: flex;overflow: hidden;border: solid 1px rgb(218 220 224 / 43%) !important;padding: 8px !important;background: white !important;}</style>';
+let styleCustomEd = '<base href="https://www.alexa.com/"><style>#alx_traffic{padding-top: 12px !important; height: auto !important; position: inherit !important;width: 100% !important;}</style>';
+document.getElementById('Extension').innerHTML = styleCustomEd + data;
+
+var links = document.getElementsByTagName("a");
+for (var l = 0; l < links.length; l++){
+links[l].addEventListener('click', evt => {
+    evt.preventDefault();  
+ipcRenderer.send('openPage', evt.target.href);
+});
+}
+
+});
+</script>
+</html>

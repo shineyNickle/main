@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title></title>
+<style>
+* { overflow: hidden !important; }
+
+#site-info {
+box-shadow: 0 1px 5px 1px #00000063;
+background-color: #292A2D;
+color: white !important;
+border-radius: 3px;
+
+z-index: 10;
+position: absolute;
+top: 0px;
+left: 0px;
+margin: 0px;
+width: 320px;
+height: auto;
+
+padding: 22px 15px;
+box-sizing: border-box;
+}
+
+#site-settings { opacity: 0.25;}
+
+#info-permissions {
+display: flex;
+flex-direction: column;
+height: auto;
+margin-top: 15px;
+padding-top: 0px;
+}
+
+#info-close {
+position: absolute;
+right: 4px;
+top: 4px;
+background: transparent;
+color: white;
+border: none;
+font-size: 20px;
+padding: 1px 7px;
+box-sizing: border-box;
+border-radius: 20px;
+}
+
+#info-header h2 {
+color: #81C995;
+font-weight: 500;
+font-size: 15px;
+font-weight: 500;
+}
+
+#info-header h3 {
+font-size: 13px;
+opacity: 0.8;
+color: white;
+margin-top: 10px;
+letter-spacing: -0.25px;
+line-height: 20px;
+font-weight: 400;
+}
+
+#info-header h4, #info-header h4 i18n {
+color: #FFD563;
+margin-top: 7px;
+font-size: 13px;
+font-weight: 500;
+}
+
+#info-header h4:hover, #info-header h4 i18n:hover { cursor: pointer; }
+#info-close:hover { background: rgba(255,255,255,0.075) !important; }
+
+#info-buttons {
+display: flex;
+flex-direction: column;
+height: 135px;
+margin-top: 15px;
+border-top: 1px solid #ffffff29;
+padding-top: 5px;
+}
+
+#info-buttons button, #info-perm {
+padding: 0px;
+background: none;
+border: none;
+display: inline-flex;
+align-items: center;
+flex-grow: 1;
+}
+
+#info-buttons button:not(#site-settings):hover { background: rgba(255,255,255,0.075); }
+
+#info-buttons img, #info-perm img {
+filter: invert(1);
+margin-right: 10px;
+opacity: 0.75;
+}
+
+#info-buttons p, #info-buttons p i18n, #info-buttons label, #info-perm p, #info-perm p i18n { color: white; }
+
+#info-buttons p, #info-perm p, #info-buttons p i18n, #info-perm p i18n {
+opacity: 0.85;
+font-size: 13px;
+}
+
+#info-buttons label {
+margin-left: 7px;
+font-size: 12px;
+opacity: 0.5;
+}
+
+#info-perm { height: 35px; }
+
+#perm-allow {
+background: rgba(0,0,0,0.35);
+color: white;
+border: none;
+padding: 7px 15px;
+border-radius: 3px;
+position: absolute;
+right: 25px;
+width: 80px;
+text-align: left;
+}
+
+#perm-text{width: 75%; }
+#info-permissions{
+margin-left: 0;
+padding-left: 5px;
+padding-right: 5px;
+} 
+
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+input[type='checkbox'],
+input[type='radio'] {
+--active: #275EFE;
+--active-inner: #fff;
+--focus: 2px rgba(39, 94, 254, .3);
+--border: #BBC1E1;
+--border-hover: #275EFE;
+--background: #fff;
+--disabled: #F6F8FF;
+--disabled-inner: #E1E6F9;
+-webkit-appearance: none;
+-moz-appearance: none;
+height: 21px;
+outline: none;
+display: inline-block;
+vertical-align: top;
+position: relative;
+margin: 0;
+cursor: pointer;
+border: 1px solid var(--bc, var(--border));
+background: var(--b, var(--background));
+-webkit-transition: background .3s, border-color .3s, box-shadow .2s;
+transition: background .3s, border-color .3s, box-shadow .2s;
+}
+input[type='checkbox']:after,
+input[type='radio']:after {
+content: '';
+display: block;
+left: 0;
+top: 0;
+position: absolute;
+-webkit-transition: opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+transition: opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s), -webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+}
+input[type='checkbox']:checked,
+input[type='radio']:checked {
+--b: var(--active);
+--bc: var(--active);
+--d-o: .3s;
+--d-t: .6s;
+--d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+}
+input[type='checkbox']:disabled,
+input[type='radio']:disabled {
+--b: var(--disabled);
+cursor: not-allowed;
+opacity: .9;
+}
+input[type='checkbox']:disabled:checked,
+input[type='radio']:disabled:checked {
+--b: var(--disabled-inner);
+--bc: var(--border);
+}
+input[type='checkbox']:disabled + label,
+input[type='radio']:disabled + label {
+cursor: not-allowed;
+}
+input[type='checkbox']:hover:not(:checked):not(:disabled),
+input[type='radio']:hover:not(:checked):not(:disabled) {
+--bc: var(--border-hover);
+}
+input[type='checkbox']:focus,
+input[type='radio']:focus {
+box-shadow: 0 0 0 var(--focus);
+}
+input[type='checkbox']:not(.switch),
+input[type='radio']:not(.switch) {
+width: 21px;
+}
+input[type='checkbox']:not(.switch):after,
+input[type='radio']:not(.switch):after {
+opacity: var(--o, 0);
+}
+input[type='checkbox']:not(.switch):checked,
+input[type='radio']:not(.switch):checked {
+--o: 1;
+}
+input[type='checkbox'] + label,
+input[type='radio'] + label {
+font-size: 14px;
+line-height: 21px;
+display: inline-block;
+vertical-align: top;
+cursor: pointer;
+margin-left: 4px;
+}
+
+input[type='checkbox']:not(.switch) {
+border-radius: 7px;
+}
+input[type='checkbox']:not(.switch):after {
+width: 5px;
+height: 9px;
+border: 2px solid var(--active-inner);
+border-top: 0;
+border-left: 0;
+left: 7px;
+top: 4px;
+-webkit-transform: rotate(var(--r, 20deg));
+transform: rotate(var(--r, 20deg));
+}
+input[type='checkbox']:not(.switch):checked {
+--r: 43deg;
+}
+input[type='checkbox'].switch {
+width: 38px;
+border-radius: 11px;
+}
+input[type='checkbox'].switch:after {
+left: 2px;
+top: 2px;
+border-radius: 50%;
+width: 15px;
+height: 15px;
+background: var(--ab, var(--border));
+-webkit-transform: translateX(var(--x, 0));
+transform: translateX(var(--x, 0));
+}
+input[type='checkbox'].switch:checked {
+--ab: var(--active-inner);
+--x: 17px;
+}
+input[type='checkbox'].switch:disabled:not(:checked):after {
+opacity: .6;
+}
+
+input[type='radio'] {
+border-radius: 50%;
+}
+input[type='radio']:after {
+width: 19px;
+height: 19px;
+border-radius: 50%;
+background: var(--active-inner);
+opacity: 0;
+-webkit-transform: scale(var(--s, 0.7));
+transform: scale(var(--s, 0.7));
+}
+input[type='radio']:checked {
+--s: .5;
+}
+}
+</style>
+</head>
+<body>
+<div id="site-info">
+<button onclick="window.close()" id="info-close">×</button>
+<div id="info-header">
+<h2 id="mainMetin">Bilgi veya Güvenli değil</h2>
+<h3 id="subMetin">Site, gizli bir bağlantı kullanmamaktadır. Birileri bu site üzerinden gönderdiğiniz veya aldığınız bilgileri görebilir ya da değiştirebilir. </h3>
+<h4 onclick="message('certifikasInfos')" id="moresetinfosss"><i18n>Daha fazla bilgi edin</i18n></h4>
+</div>
+<ul id="info-permissions"></ul>
+<div id="info-buttons">
+<button id="certificate" onclick="message('Certificate')">
+<img src="../../../images/license.svg">
+<p><i18n>Sertifika</i18n></p>
+<label id="validMetin"></label>
+</button>
+
+<button id="cookies" onclick="message('Cookies')">
+<img src="../../../images/cookie.svg">
+<p><i18n>Çerezler</i18n></p>
+<label id="cookies-in-use">(10 Aktif)</label>
+</button>
+
+<button disabled id="site-settings" onclick="message('Site Settings')">
+<img src="../../../images/settings.svg">
+<p><i18n>Site Ayarları</i18n></p>
+</button>
+</div>
+</div>
+</body>
+<script type="text/javascript"> 
+var i18n = new(require('./../../../translations/i18n-ex'));
+</script>
+<script src="assets://js/page/modals/genel.js"></script>
+<script type="text/javascript"> 
+let { ipcRenderer, remote } = require('electron');
+
+let cert = JSON.parse(decodeURIComponent(window.location.href.split('?')[1]));
+let crurls = ipcRenderer.sendSync('getCurrentURLTabss');
+
+//|| crurls.indexOf("https://") == 0
+
+if(cert){
+var ssl_conectt = cert.issuer.CN.trim(); 
+if(ssl_conectt){
+
+if (crurls.indexOf("http://") == 0) {
+document.getElementById("mainMetin").style.color = "#f93628";
+document.getElementById('mainMetin').innerHTML = i18n.__('Güvenli değil veya Tehlikeli');
+document.getElementById('subMetin').innerHTML = i18n.__('Bu sitede hiçbir hassas bilginizi (örneğin şifrelerinizi veya kredi kartı bilgilerinizi) girmemelisiniz. Aksi taktirde bu bilgiler saldırganlar tarafından çalınabilir.');
+document.getElementById('validMetin').innerHTML = i18n.__('(Geçerli)');
+}
+else{
+document.getElementById("mainMetin").style.color = "#81C995";
+document.getElementById('mainMetin').innerHTML = i18n.__('Bağlantı Güvenli');
+document.getElementById('subMetin').innerHTML = i18n.__('Bilgileriniz (örneğin şifreler veya kredi kartı numaraları) bu siteye gönderilirken gizli olur.');
+document.getElementById('validMetin').innerHTML = i18n.__('(Geçerli)');
+}
+} 
+
+} else {
+document.getElementById("mainMetin").style.color = "#f93628";
+document.getElementById('mainMetin').innerHTML = i18n.__('Güvenli değil veya Tehlikeli');
+document.getElementById('subMetin').innerHTML = i18n.__('Bu sitede hiçbir hassas bilginizi (örneğin şifrelerinizi veya kredi kartı bilgilerinizi) girmemelisiniz. Aksi taktirde bu bilgiler saldırganlar tarafından çalınabilir.');
+document.getElementById('validMetin').innerHTML = i18n.__('(Geçersiz)');
+}
+
+if (crurls.includes("file://") || crurls.includes("holla://")) {
+document.getElementById("mainMetin").style.color = "#81C995";
+document.getElementById('mainMetin').innerHTML = i18n.__('Dosya');
+document.getElementById('subMetin').innerHTML = i18n.__('Yerel veya paylaşılan bir dosyayı görüntülüyorsunuz.');
+document.getElementById('validMetin').innerHTML = '';
+document.getElementById("moresetinfosss").style.display = "none";
+}
+
+
+ipcRenderer.on('perm', (e, perm) =>       { document.getElementById('info-permissions').innerHTML += perm; });
+ipcRenderer.on('cookies', (e, cookies) => { document.getElementById('cookies-in-use').innerHTML = '(' + cookies + ' ' + i18n.__('Kullanımda')+')'; });
+
+function message(txt) { ipcRenderer.send('siteInfo', txt); }
+function editPermission(url,permission,val) { 
+var status = document.getElementById(permission).checked;
+ipcRenderer.send('savePermission', url, permission, status); 
+}
+
+
+
+new ResizeObserver(e => {
+remote.getCurrentWindow().setBounds({ height: document.getElementById('site-info').offsetHeight });
+}).observe(document.getElementById('site-info'));
+</script>
+</html>

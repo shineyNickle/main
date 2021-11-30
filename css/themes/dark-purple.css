@@ -1,0 +1,27 @@
+/* NORD */
+
+:root {
+/*Yazı*/
+--nord0: #fff;
+
+/*Border*/
+--nord2: #6D41A1;
+
+/*header üst*/
+--nord4: #462A68;
+/*nav - alt*/
+--nord5: #6D41A1;
+/*div nav-center arama*/
+--nord6: #56377C;
+
+}
+
+.tab-close {
+filter: brightness(0) invert(1);
+}
+
+#back, #forward, #refresh, #home, #site-info img, #bookmark, #shield, #menu, #system_update, #new-tab, #window-controls svg, #BookMarks img {
+filter: brightness(0) invert(1);
+}
+
+.serachkeyins .insearchs, .xsvg-iconsss {filter: brightness(0) invert(1);}

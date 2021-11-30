@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<title id="i18n">Sayfa Kaynağını Görüntüle</title>
+<script src="assets://codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="assets://codemirror/lib/codemirror.css">
+<script src="assets://codemirror/mode/javascript/javascript.js"></script>
+<link rel="stylesheet" href="assets://codemirror/theme/xq-light.css">
+<script src="assets://codemirror/addon/display/fullscreen.js"></script>
+<link rel="stylesheet" href="assets://codemirror/addon/display/fullscreen.css">
+<style>
+.CodeMirror {height: 100% !important;width: 100% !important;}
+html, body {margin: 0;padding: 0;}
+</style>
+</head>
+<body>
+</body>
+<script>
+var viewSourceMAINCode = sendSync('viewSourceMAINCode');
+var viewSourceURL = sendSync('viewSourceURL');
+document.title = i18n.__('Sayfa Kaynağını Görüntüle')+' - '+viewSourceURL;
+
+window.onbeforeunload = confirmExit;
+function confirmExit(){
+send('store', 'set', 'viewSourceURL', viewSourceURL);
+send('store', 'set', 'viewSourceMAINCode', viewSourceMAINCode);
+}
+
+var thmeCodes = ''; 
+const theme = sendSync('getTheme');
+thmeCodes = 'xq-light'; 
+
+
+if(viewSourceMAINCode){
+var myCodeMirror = CodeMirror(document.body, {
+value: viewSourceMAINCode,
+lineNumbers: true,
+mode: "javascript",
+theme: thmeCodes,
+fullLines: true,
+//readOnly: "nocursor"
+readOnly: true,
+dragDrop: false
+});
+}
+//$.get(viewSourceURL, function(data,status,xhr){});
+</script>
+</html>

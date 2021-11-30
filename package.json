@@ -1,0 +1,112 @@
+{
+ "name": "DBS",
+ "productName": "DBS",
+ "version": "3.5.7",
+ "description": "DBS Web Browser",
+ "main": "main.js",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/meforce/holla.git"
+ },
+ "keywords": [
+  "browser",
+  "web",
+  "security",
+  "privacy",
+  "internet"
+ ],
+ "build": {
+  "publish": [
+   {
+    "provider": "github",
+    "owner": "meforce",
+    "repo": "holla",
+    "vPrefixedTagName": true,
+    "releaseType": "draft",
+    "publishAutoUpdate": true,
+    "token": "e17d8db6189e96fb5ca436b7cb2d344fdb6b957b"
+   }
+  ],
+  "appId": "io.holla.meforce-win",
+  "productName": "Holla",
+  "directories": {
+   "buildResources": "build"
+  },
+  "files": [
+   "**/*",
+   "build/icons/256x256.png"
+  ],
+     "electronDownload": {
+     "mirror": "https://github.com/meforce/electron/releases/download/",
+	 "version": "11.5.0-wvvmp"
+   },
+  "win": {
+   "target": [
+    "nsis",
+    "zip"
+   ],
+   "icon": "build/icons/256x256.png"
+  },
+  "mac": {
+   "category": "productivity",
+   "target": [
+    "dmg"
+   ],
+   "icon": "build/icons/icon.icns"
+  },
+  "linux": {
+   "category": "Network",
+   "target": [
+    "AppImage",
+    "deb"
+   ]
+  },
+  "nsis": {
+   "oneClick": "false",
+   "allowToChangeInstallationDirectory": "true",
+   "perMachine": "true"
+  },
+  "fileAssociations": [
+   {
+    "name": "Holla HTML Document",
+    "description": "Holla",
+    "ext": "html",
+    "icon": "../images/holla.ico"
+   },
+   {
+    "name": "Holla WebP Image",
+    "description": "Holla WebP Image",
+    "ext": "webp",
+    "icon": "../images/holla.ico"
+   }
+  ]
+ },
+ "scripts": {
+  "start": "electron .",
+  "build-linux": "electron-builder --linux --publish never",
+  "build-win": "electron-builder --win --publish never",
+  "build-mac": "electron-builder --mac --publish always"
+ },
+ "author": "Mert Çetin <mertcetin.official@gmail.com>",
+ "license": "MIT",
+ "devDependencies": {
+  "electron": "github:meforce/electron#11.5.0-wvvmp",
+  "electron-builder": "^22.11.7",
+  "electron-devtools-installer": "^3.1.1"
+ },
+ "dependencies": {
+  "@cliqz/adblocker-electron": "github:meforce/cliqz-adblocker-castlabs-electron#v1.22.7",
+  "cors": "^2.8.5",
+  "cross-fetch": "^3.0.4",
+  "electron-context-menu": "^2.3.0",
+  "electron-store": "^8.0.0",
+  "electron-updater": "^4.3.5",
+  "express": "^4.17.1",
+  "jquery": "^3.5.1",
+  "npm": "^7.0.12",
+  "readline-sync": "^1.4.10",
+  "sortablejs": "^1.10.2",
+  "uuid": "^8.3.1",
+  "v8-compile-cache": "^2.2.0"
+ }
+}

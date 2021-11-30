@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+body { background: #35363A; margin: 0px; font-family: verdana !important; }
+*    { color: white; overflow: hidden; }
+
+#items {
+display: flex;
+flex-direction: row;
+height: 70px;
+border-bottom: 1px rgba(255, 255, 255, 0.05) solid;
+}
+
+.item {
+width: 230px;
+position: relative;
+border-right: 1px rgba(255, 255, 255, 0.25) solid;
+}
+
+.item:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+
+.item .filename {
+margin-top: 10px;
+}
+
+.item .location {
+margin-top: 5px;
+opacity: 0.5;
+width: 180px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.item p {
+margin: 0px;
+margin-left: 10px;
+font-size: 11px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+padding-right: 30px;
+}
+
+.item button, #close {
+position: absolute;
+
+right: 5px;
+top: 0px;
+bottom: 0px;
+
+height: 36px;
+width: 36px;
+
+margin: auto;
+
+background: none;
+color: rgba(255, 255, 255, 0.5);
+
+border: none;
+border-radius: 3px;
+
+text-align: center;
+font-size: 20px;
+}
+
+.item button:hover, #close:hover {
+background: rgba(255, 255, 255, 0.1);
+}
+
+.item .progressbar {
+position: absolute;
+width: 100%;
+bottom: 0px;
+background: transparent;
+}
+
+.item .progressbar > div {
+width: 0%;
+background-color: #FFD563;
+height: 2px;
+}
+
+.item .fileboyuts {
+margin-top: 5px;
+opacity: 0.6;
+width: 180px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+margin-bottom: 5px;
+}
+</style>
+</head>
+<body>
+<div id="items">
+
+</div>
+<button id="close">&times;</button>
+</body>
+
+<script>
+let { ipcRenderer, remote, shell } = require('electron');
+var i18n = new(require('./../../../translations/i18n-ex'));
+
+document.getElementById('close').addEventListener('click', async e => {
+ipcRenderer.send('getCurrentWindowHides');
+remote.getCurrentWindow().reload();
+remote.getCurrentWindow().hide();
+});
+
+
+ipcRenderer.on('newDownload', async (e, id, filename, location, getTotalBytes, getMimeType) => {
+document.getElementById('items').innerHTML =
+`<div onclick="openItems('${ id }')" class="item-control item" id="one_${ id }" draggable="true">
+<!-- <img src=""> -->
+<p class="filename">${ filename }</p>
+<p class="location">${ location }</p>
+<p class="fileboyuts">${ formatBytes(getTotalBytes) }</p>
+
+<button onclick="removoItems('${ id }')" id="close_${ id }">&times;</button>
+
+<div class="progressbar">
+<div class="inporss"></div>
+</div>
+</div>` + document.getElementById('items').innerHTML;
+});
+
+async function openItems(id){
+let loc = document.querySelector('#one_' + id).getAttribute('data-location');
+if(loc) { shell.openPath(loc.replace(/\\/g, "/")); }
+}
+
+
+async function removoItems(id){
+document.querySelector('#one_' + id).remove();
+ipcRenderer.send('cancel-download-' + id);
+}
+
+
+ipcRenderer.on('updateDownload', async (e, id, percentage, getReceivedBytes, getTotalBytes) => {
+if(document.querySelector('#one_' + id)){
+document.querySelector('#one_' + id + ' .progressbar > div').style.width = percentage + '%';
+document.querySelector('#one_' + id + ' .fileboyuts').innerHTML =  formatBytes(getReceivedBytes) + ' - ' + formatBytes(getTotalBytes);
+}
+});
+
+ipcRenderer.on('completeDownload', async (e, id, loc) => {
+document.querySelector('#one_' + id + ' .progressbar > div').style.display = "none";
+document.querySelector('#one_' + id + ' button').style.display = "none";
+document.querySelector('#one_' + id + ' .fileboyuts').innerHTML =  i18n.__('Tamamlandı');
+document.querySelector('#one_' + id).setAttribute('data-location', loc);
+});
+
+ipcRenderer.on('failedDownload', async (e, id) => {
+document.querySelector('#one_' + id).style.border = "1px red solid";
+document.querySelector('#one_' + id + ' .location').innerHTML = i18n.__('İndirme Başarısız');
+document.querySelector('#one_' + id + ' .progressbar').style.display = "none";
+});
+
+/*
+ipcRenderer.on('stoppedDownload', async (e, id, state) => {
+document.querySelector('#one_' + id + ' .location').innerHTML = 'İndirme: ' + state;
+document.querySelector('#one_' + id + ' .progressbar').style.display = "none";
+});
+*/
+
+function formatBytes(bytes, decimals = 2) {
+if (bytes === 0) return '0 Bytes';
+const k = 1024;
+const dm = decimals < 0 ? 0 : decimals;
+const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+const i = Math.floor(Math.log(bytes) / Math.log(k));
+return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+</script>
+</html>

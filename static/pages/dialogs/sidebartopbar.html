@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title></title>
+<style>
+* { overflow: hidden !important; }
+.top-bar-xxlo{
+height: 24px;
+padding: 0px 10px;
+font-size: 13px;
+display: flex;
+align-items: center;
+justify-items: center;
+border-bottom: solid 1px #ececec;
+}
+.top-bar-xxlo .svg-iconsss{
+width: 18px;
+padding-top: 2px;
+}
+</style>
+</head>
+<body>
+<div id="top-bar-xxlo" class="top-bar-xxlo">
+<div style="width: 85%;text-align: left;" id="sidebartitle">
+</div>
+
+<div id="sidebarclose" onclick="sidebarCloseOpen('close')" style="width: 5%;">
+<img onclick="sidebarCloseOpen('close')" class="svg-iconsss" src="../../../images/close.svg">
+</div>
+
+<div id="sidebarrefres" onclick="sidebarCloseOpen('reload')" style="width: 5%;">
+<img id="refff" style="display: none;" class="svg-iconsss" src="../../../images/refresh.svg">
+<img id="loadings" style="display: none;" class="svg-iconsss" src="../../../images/loading-light.gif">
+</div>    
+
+<div style="display: block;" id="sidebarpins" onclick="sidebarCloseOpen('pin')" style="width: 5%;text-align: right;">
+<img class="svg-iconsss" src="../../../images/right.svg">
+</div>
+
+<div style="display: none;" id="sidebarpinsun" onclick="sidebarCloseOpen('unpin')" style="width: 5%;text-align: right;">
+<img class="svg-iconsss" src="../../../images/left.svg">
+</div>
+
+</div>
+</body>
+<script type="text/javascript"> 
+let { ipcRenderer, remote } = require('electron');
+var i18n = new(require('./../../../translations/i18n'));
+
+window.addEventListener('load', async e => {
+document.getElementById('loadings').style.display = 'initial';
+setTimeout(() => {
+document.getElementById('refff').style.display = 'initial';
+document.getElementById('loadings').style.display = 'none';  
+}, 1500);
+
+//Dil Çeviri Yap
+var i18nTitle = document.getElementById("i18n");
+if(i18nTitle){ i18nTitle.innerHTML = i18n.__(i18nTitle.innerHTML); }
+
+[].forEach.call(document.getElementsByClassName("i18n"),function(el){ 
+if(el.placeholder){ el.placeholder = i18n.__(el.placeholder); }
+if(el.title){ el.title = i18n.__(el.title); }
+});
+
+[].forEach.call(document.getElementsByTagName("i18n"),function(el){ 
+var keyslo = el.innerHTML;
+el.innerHTML = i18n.__(keyslo);
+el.style.display = 'block';
+});
+
+});
+
+let cert = JSON.parse(decodeURIComponent(window.location.href.split('?')[1]));
+if(cert[0]){
+var items = cert[0];
+
+document.getElementById('sidebartitle').innerHTML = items.xname;
+
+function sidebarCloseOpen(type){
+
+if(type == 'pin'){
+document.getElementById('sidebarpins').style.display = 'none';
+document.getElementById('sidebarpinsun').style.display = 'block';
+}
+if(type == 'unpin'){
+document.getElementById('sidebarpins').style.display = 'block';
+document.getElementById('sidebarpinsun').style.display = 'none';
+}
+
+ 
+if(type == 'reload'){
+document.getElementById('refff').style.display = 'none';
+document.getElementById('loadings').style.display = 'initial';
+setTimeout(() => {
+document.getElementById('refff').style.display = 'initial';
+document.getElementById('loadings').style.display = 'none';  
+}, 1500);
+}
+
+ipcRenderer.send('createLeftMenuAresOpenClosed', items.xname, type, items.xwidht, items.xurl);
+}
+
+}
+</script>
+</html>

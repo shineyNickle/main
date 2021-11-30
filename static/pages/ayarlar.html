@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<link href="assets://css/settings/style.css" rel="stylesheet" type="text/css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+font-family: 'Roboto', sans-serif !important;
+}
+#softhakkinda a { font-weight: 600; }
+#sfotGuncelssx{
+color: #ffffff;
+background: #4CAF50;
+padding: 15px 20px;
+border-radius: 25px;
+margin: 0 auto;
+}
+#sfotGuncelssDegilx{
+color: #ffffff;
+background: #F44336;
+padding: 15px 20px;
+border-radius: 25px;
+margin: 0 auto;
+}
+</style>
+<meta charset="UTF-8">
+<title id="i18n">Ayarlar</title>
+</head>
+<body>
+<div id="app">
+<div class="sc-1o7hk0x gOQaAa">
+
+<!-- Menu Sol Küçük -->
+<div class="sc-1f9mk16 dfMUNM" id="left-menu"></div>
+<!-- Menu Sol Küçük Son -->
+
+<!-- Menu Geniş -->
+<div class="sc-1f9mk16 gOLKFX">
+<div class="sc-ptdg07 cOvSWp">
+<div class="sc-8qaosi czNvYA"><i18n>Ayarlar</i18n></div>
+</div>
+
+<div class="sc-f9ba9e bNoKEx">
+
+<div class="sc-1klqouq bECQfp bEUiyY" id="content-tabs-1" onclick="openContentViews('content-views-1', 'content-tabs-1')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/widget.svg);"></div>
+<i18n>Görünüm</i18n>
+</div>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-2" onclick="openContentViews('content-views-2', 'content-tabs-2')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/power.svg);"></div>
+<i18n>Başlangıçta</i18n>
+</div>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-3" onclick="openContentViews('content-views-3', 'content-tabs-3')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/search.svg);"></div>
+<i18n>Arama - Tarama</i18n>
+</div>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-4" onclick="openContentViews('content-views-4', 'content-tabs-4')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/download.svg);"></div>
+<i18n>İndirilenler</i18n>
+</div>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-5" onclick="openContentViews('content-views-5', 'content-tabs-5')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/privacy.svg);"></div>
+<i18n>Gizlilik</i18n>
+</div>
+
+<a href="holla://otomatik-doldurma">
+<div class="sc-1klqouq bECQfp" id="content-tabs-none">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/content_paste.svg);"></div>
+<i18n>Otomatik Doldurma</i18n>
+</div>
+</a>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-7" onclick="openContentViews('content-views-7', 'content-tabs-7')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/flag.svg);"></div>
+<i18n>Bayraklar</i18n>
+</div>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-6" onclick="openContentViews('content-views-6', 'content-tabs-6')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/work.svg);"></div>
+<i18n>Sürüm:</i18n> &nbsp;<b><div id="version"></div></b>
+</div>
+
+<div style="flex: 1 1 0%;"></div>
+
+<div title="Fabrika Ayarları Sıfırla" id="restclear" class="sc-1klqouq bECQfp i18n">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/clear.svg);"></div>
+<i18n>Fabrika Ayarları Sıfırla</i18n>
+</div>
+
+</div>
+</div>
+<!-- Menu Geniş Son -->
+
+<!-- Görünüm Ayarları Bölümü 1 -->
+<div id="content-views-1" class="sc-chz44j gKsQAm" style="display: block;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Görünüm</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Sol Kenar Çubuğu</i18n></div>
+<div class="sc-ur64yn gINTBr" id="leftbarmenu">
+<input id="jsonView" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>JSON görüntüleyiciyi etkinleştir</i18n></div>
+<div class="sc-ur64yn gINTBr" id="json_viewer">
+<input id="jsonView" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Ana Sayfa düğmesini göster</i18n></div>
+<div class="sc-ur64yn gINTBr" id="home">
+<input id="homeButtonView" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Yer işaretleri çubuğunu göster</i18n></div>
+<div class="sc-ur64yn gINTBr" id="bookmarkViews">
+<input id="bookmarkView" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Birden çok sekmeyi kapatırken uyarı iletişim kutusunu göster</i18n></div>
+<div class="sc-ur64yn gINTBr" id="closedAllExitWarnig">
+<input id="closedAllModalEv" type="checkbox" class="switch item-control">
+<!--checked disabled-->
+</div>
+</div>
+
+<style>
+.platcolorss {
+width: 20px;
+height: 20px;
+border-radius: 50%;
+margin-right: 15px;
+border: solid 1px rgb(234 234 234 / 59%);
+}
+</style>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Tema Rengi</i18n></div>
+<div class="sc-ur64yn gINTBr" onclick="openPopupModals('theme-color', '')">
+<div class="sc-1e1ni75 fJBUt dropdown" id="theme" style="min-width: 230px;">
+<div class="sc-1vdgtvd vluxh" id="theme-text"></div>
+<div class="sc-l9161m bcTtwB"></div>
+<div class="sc-k9lbpp QeBUP" id="theme-color" style="top: 47px; width: 100%; max-height: 200px;overflow: auto;display: none;">
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('default', 'Varsayılan', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #ececec 50%);"></div>
+<i18n>Varsayılan</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('grey', 'Gri', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, whitesmoke 50%, #c7c7c7 50%);"></div>
+<i18n>Gri</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('midnightblue', 'Gece Mavisi', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #445760 50%, #2b373d 50%);"></div>
+<i18n>Gece Mavisi</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('black', 'Siyah', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #383838 50%, #080808 50%);"></div>
+<i18n>Siyah</i18n>
+</div>
+
+
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('beige-white', 'Bej - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #fcdbc9 50%);"></div>
+<i18n>Bej - Beyaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('yellow-white', 'Sarı - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #ffde5d 50%);"></div>
+<i18n>Sarı - Beyaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('green-white', 'Yeşil - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #cbe9bf 50%);"></div>
+<i18n>Yeşil - Beyaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-turquoise-white', 'Açık Turkuaz - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #b6e8f3 50%);"></div>
+<i18n>Açık Turkuaz - Beyaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-purple-white', 'Açık Mor - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #e9d4ff 50%);"></div>
+<i18n>Açık Mor - Beyaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('pink-white', 'Pembe - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #f6d5e5 50%);"></div>
+<i18n>Pembe - Beyaz</i18n>
+</div>
+
+
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('beige', 'Bej', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #f5e1da 50%, #e3ab9a 50%);"></div>
+<i18n>Bej</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('orange', 'Turuncu', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #ffdfb7 50%, #ffab40 50%);"></div>
+<i18n>Turuncu</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-green', 'Açık Yeşil', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #c4e1c5 50%, #78bb7b 50%);"></div>
+<i18n>Açık Yeşil</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-turquoise', 'Açık Turkuaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #b7e1e4 50%, #5ab9c1 50%);"></div>
+<i18n>Açık Turkuaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-blue', 'Açık Mavi', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #cbdcf7 50%, #84adea 50%);"></div>
+<i18n>Açık Mavi</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('pink', 'Pembe', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #ffe0e6 50%, #ffaebd 50%);"></div>
+<i18n>Pembe</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-pink', 'Koyu Pembe', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #a0144f 50%, #660d33 50%);"></div>
+<i18n>Koyu Pembe</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-red', 'Koyu Kırmızı', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #a71c1c 50%, #6d1212 50%);"></div>
+<i18n>Koyu Kırmızı</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-green', 'Koyu Yeşil', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #275d2b 50%, #18391a 50%);"></div>
+<i18n>Koyu Yeşil</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-turquoise', 'Koyu Turkuaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #045b62 50%, #02393e 50%);"></div>
+<i18n>Koyu Turkuaz</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-blue', 'Koyu Mavi', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #14539a 50%, #0d3562 50%);"></div>
+<i18n>Koyu Mavi</i18n>
+</div>
+
+<div class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-purple', 'Koyu Mor', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #6d41a1 50%, #462a68 50%);"></div>
+<i18n>Koyu Mor</i18n>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Üst çubuk varyantı</i18n></div>
+<div class="sc-ur64yn gINTBr" onclick="openPopupModals('ust-cubuk', '')">
+<div class="sc-1e1ni75 fJBUt dropdown" id="headerView">
+<div class="sc-1vdgtvd vluxh" id="headerView-text"></div>
+<div class="sc-l9161m bcTtwB"></div>
+<div class="sc-k9lbpp QeBUP" id="ust-cubuk" style="top: 47px; width: 100%; display: none;">
+<div class="sc-1k8lovv hJBLHH" onclick="prossUstCubukVariant('default', 'Tam', 'headerView-text')"><i18n>Tam</i18n></div>
+<div class="sc-1k8lovv hJBLHH" onclick="prossUstCubukVariant('compact', 'Kompakt', 'headerView-text')"><i18n>Kompakt</i18n></div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Dil</i18n></div>
+<div class="sc-ur64yn gINTBr" onclick="openPopupModals('chs-lang', '')">
+<div class="sc-1e1ni75 fJBUt dropdown" id="langs">
+<div class="sc-1vdgtvd vluxh" id="langs-text"></div>
+<div class="sc-l9161m bcTtwB"></div>
+<div class="sc-k9lbpp QeBUP" id="chs-lang" style="top: 47px; width: 100%; display: none;">
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<!-- Görünüm Ayarları Bölümü 1 Son -->
+
+
+<!-- Başlangıçta Ayarları Bölümü 2 -->
+<div id="content-views-2" class="sc-chz44j gKsQAm" style="display: none;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Başlangıçta</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Yeni sekme sayfasını aç</i18n></div>
+<div class="sc-ur64yn gINTBr" id="starter">
+<input id="new-starter-1" name="radio" type="radio" value="1" class="item-control-2">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Kaldığınız yerden devam edin</i18n></div>
+<div class="sc-ur64yn gINTBr" id="starter">
+<input id="new-starter-2" name="radio" type="radio" value="2" class="item-control-2">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Arama motoru sayfası ile devam edin</i18n></div>
+<div class="sc-ur64yn gINTBr" id="starter">
+<input id="new-starter-3" name="radio" type="radio" value="3" class="item-control-2">
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Adres Çubuğu Ayarları Bölümü 3 -->
+<div id="content-views-3" class="sc-chz44j gKsQAm" style="display: none;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Adres Çubuğu</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Arama önerilerini göster</i18n></div>
+<div class="sc-ur64yn gINTBr" id="ss">
+<input id="searcDidyum" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>URL çubuğunda aramaya izin ver</i18n></div>
+<div class="sc-ur64yn gINTBr" id="url_bar_search">
+<input id="searcBarSearcs" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+
+<div style="margin-top: 30px;" class="sc-ct0163 ikMuiC"><i18n>Arama Motoru</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Adres çubuğunda kullanılan arama motoru</i18n></div>
+<div class="sc-ur64yn gINTBr" onclick="openPopupModals('search-engine', '')">
+<div class="sc-1e1ni75 fJBUt dropdown" id="search_engine">
+<div class="sc-1vdgtvd vluxh" id="search_engine-text"></div>
+<div class="sc-l9161m bcTtwB"></div>
+<div class="sc-k9lbpp QeBUP" id="search-engine" style="top: 47px; width: 100%; display: none;">
+</div>
+</div>
+</div>
+</div>
+
+
+<div style="margin-top: 30px;" class="sc-ct0163 ikMuiC"><i18n>Kullanıcı Verileri</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Kullanıcı Aracısı</i18n><br>
+<i18n style="display: block;font-size: 11px;color: #FF5722;">Bu ayarı değiştirmek uygulamayı yeniden başlatır.</i18n></div>
+<div class="sc-ur64yn gINTBr" onclick="openPopupModals('user-agent', '')">
+<div class="sc-1e1ni75 fJBUt dropdown" id="user_agent">
+<div class="sc-1vdgtvd vluxh" id="user_agent-text"></div>
+<div class="sc-l9161m bcTtwB"></div>
+<div class="sc-k9lbpp QeBUP" id="user-agent" style="top: 47px; width: 100%; display: none;">
+</div>
+</div>
+</div>
+</div>
+
+<p style="margin-top: 25px;"><i18n style="font-size: 12px">useraaentinfos1</i18n></p>
+<p style="margin-top: 15px;"><i18n style="font-size: 12px">useraaentinfos</i18n></p>
+
+</div>
+</div>
+
+<!-- İndirilenler Ayarları Bölümü 4 -->
+<div id="content-views-4" class="sc-chz44j gKsQAm" style="display: none;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>İndirilenler</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf">
+<i18n>Otomatik İndirme Yolu:</i18n>
+</div>
+<div class="sc-ur64yn gINTBr" id="dowloandsHEdef">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>İndirme Başladığında Alt Pencereyi Göster</i18n></div>
+<div class="sc-ur64yn gINTBr" id="dowloadnAltPencere">
+<input id="dowloadnAltPencereAlt" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Gizlilik Ayarları Bölümü 5 -->
+<div id="content-views-5" class="sc-chz44j gKsQAm" style="display: none;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Gizlilik</i18n></div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Uygulama kapandığında geçmişi temizle</i18n></div>
+<div class="sc-ur64yn gINTBr" id="auto_clear_history">
+<input id="autoClearHistory" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf" style="padding: 16px 0;"><i18n>Üçüncü taraf çerezlerini engelle</i18n></div>
+<div class="sc-ur64yn gINTBr" id="auto_clear_cookies">
+<input id="autoClearCookies" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Tüm istekleri HTTPS olarak zorla</i18n></div>
+<div class="sc-ur64yn gINTBr" id="https_only">
+<input id="httpsOonly" type="checkbox" class="switch item-control">
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- Bayraklar Ayarları Bölümü 7 -->
+<div id="content-views-7" class="sc-chz44j gKsQAm" style="display: none;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Bayraklar</i18n></div>
+
+<div id="flags"></div>
+
+</div>
+</div>
+
+
+<!-- Hakkında Sürüm Ayarları Bölümü 4 -->
+<div id="content-views-6" class="sc-chz44j gKsQAm" style="display: none;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin-top: 56px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Hakkında</i18n></div>
+
+<div id="defaultSoftWare">
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf">User Agent</div>
+<div class="sc-ur64yn gINTBr" id="user-agentx">USER_AGENT_HERE</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf">Chrome</div>
+<div class="sc-ur64yn gINTBr" id="chrome">CHROME_VERSION_HERE</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf">Node</div>
+<div class="sc-ur64yn gINTBr" id="node">NODE_VERSION_HERE</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf">Electron</div>
+<div class="sc-ur64yn gINTBr" id="electron">ELECTRON_VERSION_HERE</div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf">Holla</div>
+<div class="sc-ur64yn gINTBr" id="holla">HOLLA_VERSION_HERE</div>
+</div>
+
+</div>
+
+<div id="GithubsSoftWare" style="display: none;">
+
+<div class="sc-l5yqk8 jInefD" style="border: none;margin-bottom: 10px;" id="softupdatebtns">
+<div class="sc-v03tst epMHXf" style="margin: 0 auto;" id="sfotGuncelss"></div>
+<div class="sc-v03tst epMHXf" style="margin: 0 auto;" id="sfotGuncelssDegil"></div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Kullandığınız Sürüm</i18n></div>
+<div class="sc-ur64yn gINTBr" id="hollaGen">HOLLA_VERSION_HERE</div>
+</div>
+
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf"><i18n>Yayındaki Sürüm</i18n></div>
+<div class="sc-ur64yn gINTBr" id="hollaYayiym">HOLLA_VERSION_HERE</div>
+</div>
+
+<div class="dahamasosss" id="dahamasosss" style="display: none;">
+<br>
+<div><b><i18n>Yayındaki Sürüm Güncelleme Notu:</i18n></b></div><br>
+<div style="background: #f1f1f1;padding: 18px;"><code id="softhakkinda"></code></div>
+</div>
+
+<div class="sc-l5yqk8 jInefD">
+<div class="sc-v03tst epMHXf" id="githuburlss"></div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<!-- Sürüm Hakkında Son -->
+
+</div>
+</div>
+
+<div style="-webkit-app-region: no-drag;"></div>
+<div onclick="closeEventBodyAll()" id="closedEventAd" style="display: none; width: 100%;height: 100%;background: rgb(10 10 10 / 22%);position: fixed;z-index: 9;top: 0;left: 0;right: 0;bottom: 0;"></div>
+<script src="assets://js/page/settings/left-menu.js"></script>
+<script src="assets://js/page/settings/settings.js"></script>
+</body>
+</html>

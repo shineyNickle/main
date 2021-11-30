@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<style>
+html, body {
+background: none !important; 
+}
+body {    background-color: var(--nord6) !important;}
+* {
+box-sizing: border-box; 
+}
+
+.background-plate {
+position: fixed; top: 0; left: 0;
+width: 100%; height: 100%;
+opacity: 0.6;
+z-index: -1 !important;
+background-color: var(--nord1);
+}
+.container {
+max-width: 1500px;
+flex-grow: 1;
+margin: 0 auto;
+position: relative;
+width: auto;
+}
+
+.title {
+margin-top: 10px;
+color: var(--nord5);
+font-size: 60px;
+}
+.icon {
+margin-top: 70px;
+}
+.settings {
+font-size: 27.00px;
+height: 50px !important;
+}
+.bookmarks {
+font-size: 27.00px;
+height: 50px !important;
+}
+.history {
+font-size: 27.00px;
+height: 50px !important;
+}
+
+.plus {
+/*
+margin-top: 67.50px;
+margin-top: 29.5px;
+*/
+margin-bottom: auto;
+font-size: 50px;
+color: white;
+border-radius: 8px;
+width: 100%;
+height: 45px;
+object-fit: cover;
+}
+.del {
+position: absolute !important;
+top: 10px; right: 10px !important;
+width: 21px; height: 21px !important;
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+justify-content: center !important;
+background-color: var(--background);
+color: var(--foreground);
+border-radius: 5px;
+font-size: 15px;
+opacity: 0;
+}
+.columns {
+width: 100%;
+max-width: 530px;
+margin-top: 40px;
+margin-left: auto;
+margin-right: auto;
+display: flex;
+margin-bottom: 45px;
+}
+.columns:after {
+content: "";
+display: table;
+clear: both;
+}
+.columns-t {
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+max-width: 250px;
+margin: 0 auto;
+text-align: center;
+}
+.columns-t:after {
+content: "";
+display: table;
+clear: both;
+}
+.column {
+display: flex;
+/* background-color: rgba(67, 76, 94, 0.2); */
+/* border: 1px solid rgba(255, 255, 255, 0.3); */
+color: white;
+/* backdrop-filter: blur(10px); */
+border-radius: 10px;
+text-align: center;
+/* float: left; */
+margin: 1%;
+/* margin: 0 auto; */
+width: 100%;
+/* height: 120px; */
+padding: 10px;
+margin: 0 auto;
+} 
+.column:hover > .del {
+opacity: 0.7;
+}
+.column-t {
+/* background-color: rgba(67, 76, 94, 0.2); */
+/* border: 1px solid rgba(255, 255, 255, 0.3); */
+color: white;
+/* backdrop-filter: blur(10px); */
+border-radius: 10px;
+text-align: center;
+/* float: left; */
+margin: 1%;
+width: 100%;
+max-width: 90px;
+height: 200px;
+padding: 10px;
+}
+.column-t img {
+width: 26px;
+height: 26px;
+}
+@media screen and (max-width: 1200px) {
+.column {
+width: 31.333%;
+width: 100%;
+}
+}
+@media screen and (max-width: 600px) {
+.column {
+width: 100%;
+}
+}
+
+@keyframes animatetop {
+from{top: -300px;opacity: 0;}
+to{top: 0;opacity: 1;}
+}
+
+.jump {
+transition: all 0.1s;
+}
+
+.jump img:hover { 
+position: relative; 
+transform: translateY(-1px);
+background-color: rgba(67, 76, 94, 0.4); 
+border-radius: 10px;
+/*backdrop-filter: blur(5px);*/
+}
+
+.shift-down-1 { position: relative; animation: animatetop 1.5s; }
+.shift-down-2 { position: relative; animation: animatetop 1.4s; }
+.shift-down-3 { position: relative; animation: animatetop 1.3s; }
+.shift-down-4 { position: relative; animation: animatetop 1.2s; }
+.shift-down-5 { position: relative; animation: animatetop 1.1s; }
+.shift-down-6 { position: relative; animation: animatetop 1s; }
+.shift-down-7 { position: relative; animation: animatetop 0.9s; }
+.shift-down-8 { position: relative; animation: animatetop 0.8s; }
+.shift-down-9 { position: relative; animation: animatetop 0.7s; }
+
+.text-nopl {
+text-align: center;
+font-size: 18px;
+padding: 11px 5px;
+overflow: hidden;
+flex: 1;
+text-overflow: ellipsis;
+white-space: nowrap;
+width: 100%;
+max-width: 121px;
+text-shadow: 1px 2px 2px rgb(0 0 0 / 32%);
+}
+.serachkeyins{
+background: white;
+width: 100%;
+max-width: 530px;
+border-bottom: solid 1px gainsboro;
+border-right: solid 1px gainsboro;
+border-left: solid 1px gainsboro;
+
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
+margin: 0 auto;
+padding: 10px 0px;
+position: absolute;
+z-index: 999;
+left: 0;
+right: 0;
+}
+
+.serachkeyins button {
+border: none;
+background: none;
+display: flex;
+align-items: normal;
+justify-content: left;
+width: 100%;
+text-align: left;
+padding: 10px 20px;
+font-size: 15px;
+}
+.serachkeyins button:hover {
+background: #f1f1f1;
+}
+
+.suggestionSelected {background: #f1f1f1 !important;}
+
+#urlnewtab {
+height: 100%;
+width: 100%;
+background: transparent;
+border: none;
+padding: 0px 5px;
+box-sizing: border-box;
+border-radius: var(--round-corners);
+text-align: left;
+}
+#nav-center-inarea > button {
+border-radius: 50px;
+margin: 2px 0px;
+}
+
+#nav-center-inarea > button {
+padding: 10px;
+transition: var(--transition);
+border-radius: var(--round-corners);
+}
+
+
+
+#nav-center-inarea {
+background: white;
+flex-grow: 1;
+margin: 0px 5px;
+display: flex;
+border-top-right-radius: 50px;
+border-top-left-radius: 50px;
+box-shadow: inset 1px -1px 0px 0px var(--nord4), inset -1px 1px 0px 0px var(--nord4);
+box-sizing: border-box;
+width: 100%;
+padding: 0 5px;
+max-width: 530px;
+margin: 0 auto;
+height: 43px;
+}
+
+#nav-center-inarea > button > img {
+width: 17px;
+height: 17px;
+}
+#nav-center-inarea > * > button > img {
+opacity: 0.9;
+}
+
+.center_loc{
+position: fixed;
+text-align: center;
+left: 0;
+right: 0;
+margin: 0 auto;
+top: 50%;
+-webkit-transform: translateY(-50%);
+transform: translateY(-50%);
+z-index: 99999;
+}
+
+.insearchs {
+width: 16px;
+margin-right: 10px;
+filter: opacity(0.5);
+}
+</style>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="assets://global.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="i18n">Yeni Sekme</title>
+</head>
+<body>
+<div class="background-plate"></div>
+<div class="container center_loc">
+<div class="icon shift-down-1" style="margin-top: 0;">
+<!--<img style="width: 100%;max-width: 140px;" src="assets://images/newtab/holla.png">-->
+<h1 style="margin-top: 0;margin-bottom: 35px;font-size: 63px;" class="title shift-down-2">Holla</h1>
+
+<nav class="newnavsearh">
+<div id="nav-center-inarea" style="border-bottom-right-radius: 50px;border-bottom-left-radius: 50px;">
+<button id="site-info" class="re-site-info" onclick="message('site-info')">
+<img src="assets://images/newtab/search.svg">
+</button>
+
+<input id="urlnewtab" spellcheck="false" autocomplete="false" type="text" placeholder="">
+</div>
+
+<main style="display: none;" id="serachkeyins" class="serachkeyins">
+</main>
+</nav>
+
+<script>
+setTimeout(() => {
+var seracnames = sendSync('getsearchenginenames'); 
+document.getElementById('urlnewtab').placeholder = seracnames;
+document.getElementById('urlnewtab').setAttribute('data-placeholder', seracnames);
+}, 300);
+
+window.addEventListener('load', async e => {
+document.getElementById('urlnewtab').focus();
+});
+
+
+let itemcche = '';
+
+document.getElementById('urlnewtab').addEventListener('input', async e => {
+
+var query = document.getElementById('urlnewtab').value;
+var serachkeyins = document.getElementById('serachkeyins');
+
+if(!query) {  setTimeout(() => { closeBorderRadis(); serachkeyins.style.display = "none";}, 100); }
+
+let results = document.getElementsByTagName('main')[0];
+
+
+var request = new XMLHttpRequest();
+
+request.onreadystatechange = async e => {
+if (request.readyState == 4 && request.status == 200) {
+results.innerHTML = '';
+
+let buttons = document.createElement('button');
+buttons.innerHTML = '<img class="insearchs" src="assets://images/newtab/search.svg">'+query;
+buttons.id = 'xresult0';
+buttons.onclick = async e => {
+send('loadPage', query);
+};
+results.appendChild(buttons);
+
+let values = JSON.parse(request.responseText)[1];
+if (!values) return;
+for (let i = 1; i < (values.length <= 6 ? values.length : 6); i++) {
+let button = document.createElement('button');
+button.innerHTML = '<img class="insearchs" src="assets://images/newtab/search.svg">'+values[i];
+button.id = 'xresult'+i;
+button.onclick = async e => {
+document.getElementById('urlnewtab').focus();
+document.getElementById('urlnewtab').value = '';
+setTimeout(() => {
+document.getElementById('urlnewtab').value = values[i];
+}, 10);
+send('loadPage', values[i]);
+};
+
+results.appendChild(button);
+}
+
+
+let counreals = '';
+
+var selectItem = async (item) => {
+itemcche = item;
+if(item){  
+openBorderRadis();
+serachkeyins.style.display = "block"; 
+} else { 
+setTimeout(() => { closeBorderRadis(); serachkeyins.style.display = "none";}, 100);
+}
+
+counreals = 0;
+if(item){
+document.getElementById(item.id).className = 'suggestionSelected';
+}
+}
+
+
+selectItem(results.firstChild);
+
+document.addEventListener('keydown', function (e) {
+if (e.which === 13) {
+if(document.getElementById('xresult'+counreals)){
+document.getElementById('xresult'+counreals).click();
+}
+}
+
+if (e.which === 40) {
+var tests = counreals+1;
+if(document.getElementById('xresult'+tests)){
+counreals = counreals+1; 
+var bulsss = document.getElementById('xresult'+counreals);
+document.getElementsByClassName("suggestionSelected")[0].className = "";
+bulsss.className = 'suggestionSelected';
+document.getElementById('urlnewtab').focus();
+document.getElementById('urlnewtab').value = '';
+setTimeout(() => {
+document.getElementById('urlnewtab').value = bulsss.innerText;
+}, 10);
+}
+} else if (e.which === 38) {
+var tests = counreals-1;
+if(document.getElementById('xresult'+tests)){
+counreals = counreals-1; 
+var bulsss = document.getElementById('xresult'+counreals);
+document.getElementsByClassName("suggestionSelected")[0].className = "";
+bulsss.className = 'suggestionSelected';
+document.getElementById('urlnewtab').focus();
+document.getElementById('urlnewtab').value = '';
+setTimeout(() => {
+document.getElementById('urlnewtab').value = bulsss.innerText;
+}, 10);
+}
+}
+});
+
+}
+} 
+
+
+request.open("GET", `https://ac.duckduckgo.com/ac/?q=${ query }&type=list`, true); // true for asynchronous 
+request.withCredentials = true;
+request.setRequestHeader("Content-Type", "application/json");
+request.send({ 'request': "authentication token" });
+//request.send(null);
+});
+
+
+
+document.getElementById('urlnewtab').addEventListener("blur",function(e){
+setTimeout(() => {serachkeyins.style.display = "none"; closeBorderRadis();}, 100);
+});
+
+document.getElementById('urlnewtab').addEventListener("focus",function(e){
+if(document.getElementById('urlnewtab').value && itemcche){ 
+serachkeyins.style.display = "block"; 
+openBorderRadis();
+}
+});
+
+
+function openBorderRadis(){
+document.getElementById('nav-center-inarea').style.borderTopLeftRadius  = "5px"; 
+document.getElementById('nav-center-inarea').style.borderTopRightRadius   = "5px"; 
+
+document.getElementById('nav-center-inarea').style.borderBottomLeftRadius  = "0"; 
+document.getElementById('nav-center-inarea').style.borderBottomRightRadius   = "0"; 
+}
+function closeBorderRadis(){
+document.getElementById('nav-center-inarea').style.borderTopLeftRadius  = "50px"; 
+document.getElementById('nav-center-inarea').style.borderTopRightRadius   = "50px"; 
+
+document.getElementById('nav-center-inarea').style.borderBottomLeftRadius  = "50px"; 
+document.getElementById('nav-center-inarea').style.borderBottomRightRadius   = "50px"; 
+}
+</script>
+
+</div>
+
+<div class="columns">
+
+<a class="column shift-down-4 jump" id="colAdd1">
+<img class="plus" width="45">
+<img class="del" style="display: none;">
+<div class="plus text-nopl" style="display: none;"></div>
+</a>
+
+<a class="column shift-down-5 jump" id="colAdd2">
+<img class="plus" width="45">
+<img class="del" style="display: none;">
+<div class="plus text-nopl" style="display: none;"></div>
+</a>
+<a class="column shift-down-6 jump" id="colAdd3">
+<img class="plus" width="45">
+<img class="del" style="display: none;">
+<div class="plus text-nopl" style="display: none;"></div>
+</a>
+<a class="column shift-down-7 jump" id="colAdd4">
+<img class="plus" width="45">
+<img class="del" style="display: none;">
+<div class="plus text-nopl" style="display: none;"></div>
+</a>
+<a class="column shift-down-8 jump" id="colAdd5">
+<img class="plus" width="45">
+<img class="del" style="display: none;">
+<div class="plus text-nopl" style="display: none;"></div>
+</a>
+<a class="column shift-down-9 jump" id="colAdd6">
+<img class="plus" width="45">
+<img class="del" style="display: none;">
+<div class="plus text-nopl" style="display: none;"></div>
+</a>
+</div>
+<div class="columns-t altlogobarss">
+<a class="column-t settings shift-down-7 jump" target="_blank" href="holla://ayarlar">
+<img src="assets://images/settings/settings.svg">
+</a>
+<a class="column-t bookmarks shift-down-8 jump" target="_blank" href="holla://yer-imleri">
+<img src="assets://images/settings/bookmark.svg">
+</a>
+<a class="column-t history shift-down-9 jump" target="_blank" href="holla://gecmis">
+<img src="assets://images/settings/history.svg">
+</a>
+<a class="column-t download shift-down-9 jump" target="_blank" href="holla://indirilenler">
+<img src="assets://images/settings/download.svg">
+</a>
+</div>
+</div>
+
+<div id="bottomWallinfos" class="bottomWallinfos">
+<div style="opacity: 0;" class="neramolos nautoimagess" id="artinfoss">
+<a target="_blank" class="nautoimagess ahoverloads" id="linkowals" href="">
+<img class="ediitdamlsos" src="assets://images/settings/insert_link_black.svg">
+<div class="itemlotousc" id="textmeidlos"></div>
+</a>
+</div>
+<div class="neramolos" onclick="openReClosedSettings()" style="text-align: right;justify-items: right;" id="editthemes">
+<img style="margin: 0 13px 0 8px;" class="ediitdamlsos" src="assets://images/settings/invert_colors_black.svg">
+</div>
+</div>
+
+<style>
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.ahoverloads{
+padding: 0 13px 0 8px;
+}
+.ahoverloads:hover{
+background: rgb(0 0 0 / 15%);
+border-radius: 5px;
+}
+.nautoimagess{
+text-align: left;
+justify-items: left;
+display: flex;
+align-items: center;
+font-size: 13px;
+}
+.itemlotousc{padding-left: 10px; color: white; padding-top: 2px;}
+.ediitdamlsos{
+width: 25px;
+height: 25px;
+filter: invert(90%) sepia(9%) saturate(224%) hue-rotate(180deg) brightness(99%) contrast(91%) !important;
+border-radius: 50%;
+}
+.ediitdamlsos:hover{ background: azure;}
+.bottomWallinfos {
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+z-index: 9999;
+display: flex;
+}
+.neramolos {
+color: white;
+width: 50%;    padding: 25px 20px;
+}
+
+.altlogobarss img {
+filter: invert(90%) sepia(9%) saturate(224%) hue-rotate(180deg) brightness(99%) contrast(91%) !important;
+}
+</style>
+
+<style>
+.lds-ring {
+margin-top: 50px;
+display: inline-block;
+position: relative;
+width: 80px;
+height: 80px;
+}
+.lds-ring div {
+box-sizing: border-box;
+display: block;
+position: absolute;
+width: 64px;
+height: 64px;
+margin: 8px;
+border: 8px solid #fdd;
+border-radius: 50%;
+animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+border-color: #fdd transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+0% {
+transform: rotate(0deg);
+}
+100% {
+transform: rotate(360deg);
+}
+}
+
+.modal-theme-settings{
+width: 100%;
+height: 100%;
+background-color: rgb(0 0 0 / 40%)
+}
+.modal-theme-settingsx{
+width: 100%;
+max-width: 860px;
+background: white;
+height: 500px;
+border-radius: 10px;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.modal-theme-settings, .modal-theme-settings i18n  {
+font-family: 'Roboto', sans-serif !important;
+}
+
+.walpaperscontens{
+width: 144px;
+float: left;
+height: 149px;
+border-radius: 5px;
+padding: 10px;
+margin: 0px;
+}
+.walpaperscontens img{
+width: 135px;
+object-fit: cover;
+height: 140px;
+border-radius: 5px;
+filter: none;
+margin: 0 !important;
+}
+.walpaperscontens img:hover{
+filter: opacity(0.5);
+}
+.wallcategors{  
+padding: 0;
+padding-right: 15px;
+font-size: 14px;
+}
+.wallcategors:hover i18n{  
+font-weight: 500;
+color: #2196F3;
+}
+
+.wallkares{
+height: 100%;
+display: inline-block;
+}
+
+.loadsscoo{margin: 0 auto;}
+.loadsscoo:hover{
+color: #2196F3;
+font-weight: 500;
+}
+
+#closedxwal{
+position: absolute;
+right: -9px;
+margin-top: -9px;
+font-size: 22px;
+background: #F44336;
+color: white;
+width: 38px;
+height: 38px;
+border-radius: 50%;
+padding: 4px;
+}
+#closedxwal:hover{background: #fb655a;}
+
+.uploadimagesadd{
+border: solid 1px #cccccc;
+width: 133px;
+height: 138px;
+margin: 6px 6px 0 4px;
+display: grid;
+}
+.uploadimagesadd:hover { background:#f1f1f1; }
+#rebackbackgr{
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: 0;
+}
+
+.animation-target {
+-webkit-animation: animation 1500ms linear infinite both;
+animation: animation 1500ms linear infinite both;
+}
+
+@-webkit-keyframes animation { 
+0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+2.9% { -webkit-transform: matrix3d(1.062, 0, 0, 0, 0, 1.062, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.062, 0, 0, 0, 0, 1.062, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+5.81% { -webkit-transform: matrix3d(1.078, 0, 0, 0, 0, 1.078, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.078, 0, 0, 0, 0, 1.078, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+9.41% { -webkit-transform: matrix3d(1.063, 0, 0, 0, 0, 1.063, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.063, 0, 0, 0, 0, 1.063, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+12.91% { -webkit-transform: matrix3d(1.037, 0, 0, 0, 0, 1.037, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.037, 0, 0, 0, 0, 1.037, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+16.52% { -webkit-transform: matrix3d(1.014, 0, 0, 0, 0, 1.014, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.014, 0, 0, 0, 0, 1.014, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+20.02% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+25.83% { -webkit-transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+40.04% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+45.85% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+60.06% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+65.87% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+80.08% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+85.89% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+
+@keyframes animation { 
+0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+2.9% { -webkit-transform: matrix3d(1.062, 0, 0, 0, 0, 1.062, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.062, 0, 0, 0, 0, 1.062, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+5.81% { -webkit-transform: matrix3d(1.078, 0, 0, 0, 0, 1.078, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.078, 0, 0, 0, 0, 1.078, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+9.41% { -webkit-transform: matrix3d(1.063, 0, 0, 0, 0, 1.063, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.063, 0, 0, 0, 0, 1.063, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+12.91% { -webkit-transform: matrix3d(1.037, 0, 0, 0, 0, 1.037, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.037, 0, 0, 0, 0, 1.037, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+16.52% { -webkit-transform: matrix3d(1.014, 0, 0, 0, 0, 1.014, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.014, 0, 0, 0, 0, 1.014, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+20.02% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+25.83% { -webkit-transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+40.04% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+45.85% { -webkit-transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+60.06% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+65.87% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+80.08% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+85.89% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+</style>
+
+<script>
+function bounceefecsks(){
+document.getElementById('app').className = "animation-target";
+setTimeout(() => {
+document.getElementById('app').className = "";
+}, 500);
+}
+</script>
+
+<div id="modalThemeSettings" style="display: none;" class="center_loc modal-theme-settings">
+<div onclick="bounceefecsks();" id="rebackbackgr" class=""></div>
+<div id="modalThemeSettingss" class="center_loc modal-theme-settingsx">
+
+<link href="assets://css/settings/style.css" rel="stylesheet" type="text/css">
+
+<div id="app" style="height: 100%;">
+<div class="sc-1o7hk0x gOQaAa" style="height: 100%; background: white;border-radius: 10px;">
+
+<div onclick="openReClosedSettings()" id="closedxwal">x</div>
+
+<!-- Menu Geniş -->
+<div class="sc-1f9mk16 gOLKFX" style="height: 100%;border-top-left-radius: 10px;border-bottom-left-radius: 10px;width: 225px;padding: 0px 25px;">
+<div class="sc-ptdg07 cOvSWp">
+<div class="sc-8qaosi czNvYA" style="font-size: 20px;margin-top: 6px;"><i18n>Özelleştirme</i18n></div>
+</div>
+
+<div class="sc-f9ba9e bNoKEx">
+
+<div style="margin-bottom: 10px;" class="sc-1klqouq bECQfp bEUiyY" id="content-tabs-1" onclick="openContentViews('content-views-1', 'content-tabs-1')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/widget.svg);"></div>
+<i18n style="text-align: left;font-size: 13px;">Arka Plan</i18n>
+</div>
+
+<div class="sc-1klqouq bECQfp" id="content-tabs-2" onclick="openContentViews('content-views-2', 'content-tabs-2')">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/invert_colors_black.svg);"></div>
+<i18n style="text-align: left;font-size: 13px;">Renk ve tema</i18n>
+</div>
+
+
+</div>
+</div>
+<!-- Menu Geniş Son -->
+
+<!-- Arka Plan Ayarları Bölümü 1 -->
+<div id="content-views-1" class="sc-chz44j gKsQAm" style="display: block; height: 100%; padding-bottom: 30px;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin: 35px 15px 15px 30px;">
+<div class="sc-ct0163 ikMuiC"><i18n>Arka Plan</i18n> <a style="font-size: 13px;padding-left: 10px;" target="_blank" href="https://unsplash.com/">Unsplash.com</a></div>
+
+<div id="categorises">
+<div class="sc-ct0163 ikMuiC" style="margin-top: 20px;">
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('nature','','')"><i18n>nature</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('mountain','','')"><i18n>mountain</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('sea','','')"><i18n>sea</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('colors','','')"><i18n>colors</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('forest','','')"><i18n>forest</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('shapes','','')"><i18n>shapes</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('textures','','')"><i18n>textures</i18n></button>
+</div>
+<div class="sc-ct0163 ikMuiC" style="margin-bottom: 25px;"> 
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('world','','')"><i18n>world</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('art','','')"><i18n>art</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('music','','')"><i18n>music</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('solid colors','','')"><i18n>solid colors</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('wallpapers','','')"><i18n>wallpapers</i18n></button>
+<button class="wallcategors" id="wallcategors" onclick="getwallpapers('sport','','')"><i18n>sport</i18n></button>
+</div>
+</div>
+
+<div class="wallkares" id="wallkares">
+<!--<div class="lds-ring"><div></div><div></div><div></div><div></div></div>-->
+</div>
+
+<div id="loaddd" class="sc-ct0163 ikMuiC" style="margin-top:25px; text-align: center;"></div>
+
+
+</div>
+</div>
+<!-- Arka Plan Ayarları Bölümü 1 Son -->
+
+
+<!-- Renk Tema Ayarları Bölümü 2 -->
+<div id="content-views-2" class="sc-chz44j gKsQAm" style="display: none; height: 100%; padding-bottom: 30px;">
+<div class="sc-frx3vm kTSEYd" style="max-width: 800px; margin: 35px 15px 15px 30px;">
+
+<style>
+.newclorplats .hJBLHH {
+width: 145px;
+float: left;
+height: 110px;
+font-size: 11px;
+display: grid;
+margin: 12px 0;
+border-radius: 10px;
+}
+.newclorplats .hJBLHH:hover { background: #fbfbfb; }
+.platcolorss {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+margin: 0 auto;
+border: solid 1px #eaeaea;
+}
+.uphotofnams{
+position: absolute;
+margin-top: 110px;
+font-size: 11px;
+text-align: left;
+width: 128px;
+color: white;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+text-shadow: 1px 1px rgb(0 0 0 / 25%);
+padding: 12px 0;
+cursor: pointer;
+}
+.uphotofnams:hover{
+color: #ececec;
+}
+</style>
+
+
+<div class="sc-k9lbpp newclorplats" id="theme-color">
+
+<div style="margin-top: 26px;font-size: 15px;margin-bottom: 5px;font-weight: 600;" class="sc-ct0163 ikMuiC"><i18n>Klasik</i18n></div>
+
+<div style="display: inline-table;" class="sc-k9lbpp newclorplats" id="colorklasik">
+
+<div id="default" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('default', 'Varsayılan', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #ececec 50%);"></div>
+<i18n>Varsayılan</i18n>
+</div>
+
+<div id="grey" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('grey', 'Gri', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, whitesmoke 50%, #c7c7c7 50%);"></div>
+<i18n>Gri</i18n>
+</div>
+
+<div id="midnightblue" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('midnightblue', 'Gece Mavisi', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #445760 50%, #2b373d 50%);"></div>
+<i18n>Gece Mavisi</i18n>
+</div>
+
+<div id="black" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('black', 'Siyah', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #383838 50%, #080808 50%);"></div>
+<i18n>Siyah</i18n>
+</div>
+
+</div>
+
+
+
+<div style="margin-top: 20px;font-size: 15px;margin-bottom: 10px;font-weight: 600;" class="sc-ct0163 ikMuiC"><i18n>Beyaz Geçişler</i18n></div>
+
+<div style="display: inline-table;" class="sc-k9lbpp newclorplats" id="colorwhitebej">
+
+<div id="beige-white" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('beige-white', 'Bej - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #fcdbc9 50%);"></div>
+<i18n>Bej - Beyaz</i18n>
+</div>
+
+<div id="yellow-white" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('yellow-white', 'Sarı - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #ffde5d 50%);"></div>
+<i18n>Sarı - Beyaz</i18n>
+</div>
+
+<div id="green-white" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('green-white', 'Yeşil - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #cbe9bf 50%);"></div>
+<i18n>Yeşil - Beyaz</i18n>
+</div>
+
+<div id="light-turquoise-white" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-turquoise-white', 'Açık Turkuaz - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #b6e8f3 50%);"></div>
+<i18n>Açık Turkuaz - Beyaz</i18n>
+</div>
+
+<div id="light-purple-white" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-purple-white', 'Açık Mor - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #e9d4ff 50%);"></div>
+<i18n>Açık Mor - Beyaz</i18n>
+</div>
+
+<div id="pink-white" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('pink-white', 'Pembe - Beyaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, white 50%, #f6d5e5 50%);"></div>
+<i18n>Pembe - Beyaz</i18n>
+</div>
+
+</div>
+
+
+
+
+
+<div style="margin-top: 20px;font-size: 15px;margin-bottom: 10px;font-weight: 600;" class="sc-ct0163 ikMuiC"><i18n>Açık Renk Geçişler</i18n></div>
+
+<div style="display: inline-table;" class="sc-k9lbpp newclorplats" id="colorbej">
+
+<div id="beige" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('beige', 'Bej', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #f5e1da 50%, #e3ab9a 50%);"></div>
+<i18n>Bej</i18n>
+</div>
+
+<div id="orange" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('orange', 'Turuncu', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #ffdfb7 50%, #ffab40 50%);"></div>
+<i18n>Turuncu</i18n>
+</div>
+
+<div id="light-green" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-green', 'Açık Yeşil', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #c4e1c5 50%, #78bb7b 50%);"></div>
+<i18n>Açık Yeşil</i18n>
+</div>
+
+<div id="light-turquoise" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-turquoise', 'Açık Turkuaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #b7e1e4 50%, #5ab9c1 50%);"></div>
+<i18n>Açık Turkuaz</i18n>
+</div>
+    
+<div id="light-blue" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('light-blue', 'Açık Mavi', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #cbdcf7 50%, #84adea 50%);"></div>
+<i18n>Açık Mavi</i18n>
+</div>
+
+<div id="pink" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('pink', 'Pembe', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #ffe0e6 50%, #ffaebd 50%);"></div>
+<i18n>Pembe</i18n>
+</div>
+
+</div>
+
+
+
+
+
+
+<div style="margin-top: 20px;font-size: 15px;margin-bottom: 10px;font-weight: 600;" class="sc-ct0163 ikMuiC"><i18n>Koyu Renk Geçişler</i18n></div>
+
+<div style="display: inline-table;" class="sc-k9lbpp newclorplats" id="colorbej">
+
+<div id="dark-pink" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-pink', 'Koyu Pembe', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #a0144f 50%, #660d33 50%);"></div>
+<i18n>Koyu Pembe</i18n>
+</div>
+
+<div id="dark-red" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-red', 'Koyu Kırmızı', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #a71c1c 50%, #6d1212 50%);"></div>
+<i18n>Koyu Kırmızı</i18n>
+</div>
+
+<div id="dark-green" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-green', 'Koyu Yeşil', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #275d2b 50%, #18391a 50%);"></div>
+<i18n>Koyu Yeşil</i18n>
+</div>
+
+<div id="dark-turquoise" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-turquoise', 'Koyu Turkuaz', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #045b62 50%, #02393e 50%);"></div>
+<i18n>Koyu Turkuaz</i18n>
+</div>
+    
+<div id="dark-blue" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-blue', 'Koyu Mavi', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #14539a 50%, #0d3562 50%);"></div>
+<i18n>Koyu Mavi</i18n>
+</div>
+
+<div id="dark-purple" class="sc-1k8lovv hJBLHH" onclick="prossTemaRengi('dark-purple', 'Koyu Mor', 'theme-text')">
+<div class="platcolorss" style="background-image: linear-gradient(90deg, #6d41a1 50%, #462a68 50%);"></div>
+<i18n>Koyu Mor</i18n>
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+</div>
+<!-- Renk Tema Ayarları Bölümü 2 Son -->
+
+</div>
+</div>
+
+<input id="selecImagePıckers" class="displaynonesss" min="1" max="1" type="file" accept="image/*" style="display: none;" (change)="inputSelectPictureNewsPicker($event)">
+
+</div>
+</div>
+
+
+<script>
+/* Tema Çek Yükle */
+function xloadThemes(){
+const theme = sendSync('getTheme');
+if(theme){ themeObj = theme.toLowerCase(); }
+
+var activecolor = document.getElementById(theme);
+if(activecolor){
+activecolor.insertAdjacentHTML('afterbegin',`
+<div id="sctivecolorss"style="position: absolute;right: 20px;top: 5px;filter: contrast(0.5) invert(1) sepia(1) saturate(50) hue-rotate(164deg);"><img src="assets://images/newtab/check_circle.svg"></div>
+`.trim());
+}
+
+/*
+if (document.querySelector('head link[href*="assets://themes"]')) document.querySelector('head link[href*="assets://themes"]').remove();
+document.head.innerHTML += '<link rel="stylesheet" href="assets://themes/'+themeObj+'.css">';*/
+}
+xloadThemes();
+/* Tema Çek Yükle Son */
+
+/* Ayarları Aç Kapat*/
+function openReClosedSettings(){
+var elementIdCloseEv = document.getElementById('closedxwal');
+var mainPopulModals = document.getElementById('modalThemeSettings');
+var ccvv1 = document.getElementById('content-views-1');
+var ccvv2 = document.getElementById('content-views-2');
+
+if(mainPopulModals.style.display == 'none'){
+mainPopulModals.style.display = 'block';
+ccvv1.scrollTop = 0; ccvv2.scrollTop = 0;
+getwallpapers('nature','');
+} else {
+mainPopulModals.style.display = 'none'; 
+}
+
+}
+
+var gopro = false;
+
+/* İç İşlem Pencere Değiştir */
+function openContentViews(contentID,tabsID){
+//'content-views-1', 'content-tabs-1'
+document.getElementById('content-views-1').style.display = "none";
+document.getElementById("content-tabs-1").classList.remove('bEUiyY');
+document.getElementById('content-views-2').style.display = "none";
+document.getElementById("content-tabs-2").classList.remove('bEUiyY');
+
+var elementIdBul_content = document.getElementById(contentID);
+var elementIdBul_tabs = document.getElementById(tabsID);
+
+if(elementIdBul_content && elementIdBul_tabs){
+elementIdBul_content.style.display = "block";
+elementIdBul_tabs.classList.add('bEUiyY');
+}
+}
+
+function getwallpapers(querys,npages,collection){
+let resultsss = document.getElementById('wallkares');
+var requests = new XMLHttpRequest();
+
+
+requests.onreadystatechange = async e => {
+if (requests.readyState == 4 && requests.status == 200) {
+
+
+let values =  JSON.parse(requests.response).results;
+if (values){
+if(!npages){resultsss.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>';}
+document.getElementById('categorises').style.display = "block";
+
+if(!npages){resultsss.innerHTML = '';}
+
+if(!npages){
+let buttonload = document.createElement('button');
+buttonload.innerHTML = `<img style="margin: 0 auto !important;width: 26px;height: 26px;margin-bottom: -45px !important; background: transparent !important;filter: opacity(0.4) !important;" class="ediitdamlsos" src="assets://images/settings/upload_black.svg">`+i18n.__('Cihazdan Yükle');;
+buttonload.id = 'uploadimagesadd';
+buttonload.className = 'walpaperscontens uploadimagesadd';
+buttonload.onclick = async e => {
+document.getElementById("selecImagePıckers").click();
+};
+resultsss.appendChild(buttonload);
+}
+
+for (let i of values) {
+let button = document.createElement('button');
+button.innerHTML = `<img class="insearchs" src="${i.urls.thumb}"> <div  onclick="goprofile('${i.user.links.html}')" class="uphotofnams">${i.user.name}</div>`;
+button.id = 'sxresult'+i;
+button.className = 'walpaperscontens';
+button.onclick = async e => {
+if(!gopro){
+var datass = { name: i.user.name,username: i.user.username,html: i.links.html,backgroundTheme: i.urls.regular };
+send('newTabWallpaper', 'saveItem', datass);
+setTimeout(() => {
+loadWalpaers();
+}, 200);
+}
+};
+
+resultsss.appendChild(button);
+}
+
+let loadddss = document.getElementById('loaddd');
+loadddss.innerHTML = '';
+let buttonload = document.createElement('button');
+buttonload.innerHTML = i18n.__('Daha Fazla Göster');``;
+buttonload.id = 'loadsss';
+buttonload.className = 'loadsscoo';
+buttonload.onclick = async e => {
+getwallpapers(querys,'true');
+loadddss.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>';
+};
+loadddss.appendChild(buttonload);
+}
+} else {
+
+let buttonload = document.createElement('button');
+if(!document.getElementById('uploadimagesadd')){
+document.getElementById('categorises').style.display = "none";
+buttonload.innerHTML = `<img style="margin: 0 auto !important;width: 26px;height: 26px;margin-bottom: -45px !important; background: transparent !important;filter: opacity(0.4) !important;" class="ediitdamlsos" src="assets://images/settings/upload_black.svg">`+i18n.__('Cihazdan Yükle');;
+buttonload.id = 'uploadimagesadd';
+buttonload.className = 'walpaperscontens uploadimagesadd';
+buttonload.onclick = async e => {
+document.getElementById("selecImagePıckers").click();
+};
+resultsss.appendChild(buttonload);
+}
+}
+}
+var pages = 1;
+if(npages){
+pages = pages+1;
+}
+
+
+var urlsss;
+//demo satış için
+var sclientid = 'y1MzFnYO3AqpW5kUSiO6Hj50uuIwETqqxuxcyQokVtk';
+
+if(collection){
+urlsss = `https://api.unsplash.com/search/users?client_id=${sclientid}&page=${pages}&per_page=30&query=${querys}&orientation=landscape`;
+} else {
+urlsss = `https://api.unsplash.com/search/photos?client_id=${sclientid}&page=${pages}&per_page=30&query=${querys}&orientation=landscape`;
+}
+
+requests.open("GET", `${urlsss}`, true); // true for asynchronous 
+requests.withCredentials = true;
+requests.setRequestHeader("Content-Type", "application/json");
+requests.send({ 'request': "authentication token" });
+}
+
+
+function loadWalpaers(){
+// Load background theme
+let itemss = sendSync('newTabWallpaper', 'getshow', '');
+let body = document.querySelector('body');
+body.style = `background: url('${ itemss.backgroundTheme }') no-repeat center center fixed !important;background-size:cover !important;text-align: center;`;
+
+if(itemss.username && itemss.html){
+document.getElementById('artinfoss').style.opacity = "1";
+document.getElementById('linkowals').href = itemss.html+'?utm_source=Holla+Browser&utm_medium=referral';
+document.getElementById('textmeidlos').innerText = i18n.__('Fotoğraf:')+' '+itemss.name +' | Unsplash';
+} else {
+document.getElementById('artinfoss').style.opacity = "0";
+document.getElementById('linkowals').href = "";
+document.getElementById('textmeidlos').innerText = "";
+}
+
+
+}
+loadWalpaers();
+
+
+/* Tema Değiştirme İşlemi */
+function prossTemaRengi(eValue, eText, idElementxText){
+send('store', 'set', 'settings.'+'theme', eValue);
+sendSync('loadThemeNews');
+
+document.getElementById("sctivecolorss").remove();
+
+var activecolor = document.getElementById(eValue);
+if(activecolor){
+activecolor.insertAdjacentHTML('afterbegin',`
+<div id="sctivecolorss"style="position: absolute;right: 20px;top: 5px;filter: contrast(0.5) invert(1) sepia(1) saturate(50) hue-rotate(164deg);"><img src="assets://images/newtab/check_circle.svg"></div>
+`.trim());
+}
+}
+
+
+/* Select Photo Render Pross */
+function tumbImageLoad(image) {
+let resize = 800;
+let quality = 0.6;
+
+const img = new Image();
+img.src = image;
+
+img.onload = () => {
+const canvas = document.createElement('canvas');
+let ctxTumb = canvas.getContext('2d');
+let picaWidth; let picaHeight;
+
+let maxWH = resize;
+
+if (img.width > img.height) {
+picaWidth = maxWH;
+picaHeight = maxWH * img.height / img.width
+} else {
+picaWidth = maxWH * img.width / img.height;
+picaHeight = maxWH;
+}
+
+canvas.width = picaWidth;
+canvas.height = picaHeight;
+
+ctxTumb.fillStyle = 'white'
+ctxTumb.fillRect(0, 0, picaWidth, picaHeight);
+ctxTumb.drawImage(img, 0, 0, picaWidth, picaHeight);
+
+const resultImageCrop = canvas.toDataURL('image/jpeg', quality);
+
+setTimeout(() => {
+if(resultImageCrop){
+var datass = { name: "",username: "",html: "",backgroundTheme: resultImageCrop };
+send('newTabWallpaper', 'saveItem', datass);
+setTimeout(() => {loadWalpaers();}, 200);
+}
+}, 500);
+
+}
+}
+
+/* Select Photo Render Start */
+function processImageLoad(image){
+tumbImageLoad(image); 
+}
+
+document.getElementById('selecImagePıckers').addEventListener('change', inputSelectPictureNewsPicker);
+
+function inputSelectPictureNewsPicker(event) {
+var MAX_FILE_SIZE_ORGIN = 6 * 1024 * 1024;
+var file = event.srcElement.files[0];
+if(file){
+if(file.type == 'image/png' || file.type == 'image/PNG' || file.type == 'image/jpeg' || file.type == 'image/JPEG' || file.type == 'image/jpg' || file.type == 'image/JPG'){
+if (file.size > MAX_FILE_SIZE_ORGIN){ 
+} else {
+var reader = new FileReader();
+//let reader = this.getFileReader();
+
+reader.onload = () => {
+var result_images = reader.result;
+processImageLoad(result_images);
+setTimeout(() => { if(reader) { reader.abort(); } }, 100);
+};
+
+reader.onerror = () => {
+setTimeout(() => { if(reader) { reader.abort(); } }, 100);
+};
+
+
+// Onload Function will run after video has loaded
+reader.readAsDataURL(file);
+
+}
+} else {}
+} else {}
+}
+
+function goprofile(link){
+gopro = true;
+send('openPage', link+'?utm_source=Holla+Browser&utm_medium=referral');
+setTimeout(() => {
+gopro = false;
+}, 100);
+}
+</script>
+
+
+
+</body>
+</html>
+<script>
+let allowNew = true;
+let items = document.querySelectorAll('.column');
+
+let cross = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z'/%3E%3C/svg%3E`;
+let add = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none'
+d='M0 0h24v24H0z'/%3E%3Cpath fill='white' d='M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z'/%3E%3C/svg%3E`;
+let earth = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none'
+d='M0 0h24v24H0z'/%3E%3Cpath fill='white' d='M6.235 6.453a8 8 0 0 0 8.817 12.944c.115-.75-.137-1.47-.24-1.722-.23-.56-.988-1.517-2.253-2.844-.338-.355-.316-.628-.195-1.437l.013-.091c.082-.554.22-.882 2.085-1.178.948-.15 1.197.228 1.542.753l.116.172c.328.48.571.59.938.756.165.075.37.17.645.325.652.373.652.794.652 1.716v.105c0 .391-.038.735-.098 1.034a8.002 8.002 0 0 0-3.105-12.341c-.553.373-1.312.902-1.577 1.265-.135.185-.327 1.132-.95 1.21-.162.02-.381.006-.613-.009-.622-.04-1.472-.095-1.744.644-.173.468-.203 1.74.356 2.4.09.105.107.3.046.519-.08.287-.241.462-.292.498-.096-.056-.288-.279-.419-.43-.313-.365-.705-.82-1.211-.96-.184-.051-.386-.093-.583-.135-.549-.115-1.17-.246-1.315-.554-.106-.226-.105-.537-.105-.865 0-.417 0-.888-.204-1.345a1.276 1.276 0 0 0-.306-.43zM12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z'/%3E%3C/svg%3E`;
+
+let body = document.querySelector('body');
+let del = document.querySelectorAll('.del');
+for (let i = 0; i < del.length; i++) {
+del[i].setAttribute('src', cross);
+//del[i].setAttribute('onclick', `clearItem(${i});`);
+del[i].onclick = function(e){ e.preventDefault(); clearItem(i); };
+}
+
+let loadItems = sendSync('newTab', 'loadItems');
+
+function setItem(item, url, index) {
+let icon = item.querySelector('.plus');
+if (url === '') {
+icon.setAttribute('src', add);
+//item.setAttribute('onclick', `newItem(${index})`);
+item.onclick = function(e){ e.preventDefault(); newItem(index); };
+var ddimtextBos = document.getElementById(item.id).getElementsByClassName('text-nopl')[0];
+var ddimagesBos = document.getElementById(item.id).getElementsByClassName('plus')[0];
+ddimagesBos.style.display = 'none';
+ddimtextBos.style.display = 'block';
+ddimtextBos.style.background = random_bg_color();
+ddimtextBos.innerHTML = `<img style="width: 24px;height: 24px;" class="plus" width="45" src="${add}">`;
+} else {
+item.onclick = function(e){};
+item.setAttribute('href', `${url}`);
+document.getElementById(item.id).getElementsByClassName('del')[0].style.display = 'flex';
+var ddimages = document.getElementById(item.id).getElementsByClassName('plus')[0];
+var ddimtext = document.getElementById(item.id).getElementsByClassName('text-nopl')[0];
+let origins_url = url.substr(url.indexOf('://')+3);
+let origins_url2 = origins_url.substr(origins_url.indexOf('www.')+4);
+var origins_url3 = origins_url2.replace('.com', '');
+var origins_url4 = origins_url3.replace('.tr', '');
+
+try {
+let origin = url.substr(url.indexOf('://')+3);
+//let origin = (new URL(url)).origin;
+//icon.setAttribute('src', `https://www.google.com/s2/favicons?sz=64&domain_url=${origin}`);
+icon.setAttribute('src', `https://speeddials.opera.com/api/v1/thumbnails/${origin}`);
+ddimages.style.display = 'block';
+ddimtext.style.display = 'none';
+} catch (e) {
+//icon.setAttribute('src', earth);
+}
+icon.onerror = () => { 
+//icon.setAttribute('src', earth); 
+ddimages.style.display = 'none';
+ddimtext.style.display = 'block';
+ddimtext.style.background = random_bg_color();
+if(origins_url4 == 'salyap'){ ddimtext.style.background = 'rgb(3 169 244)'; }
+if(origins_url4 == 'turkcell'){ ddimtext.style.background = 'rgb(40 85 172)'; }
+if(origins_url4 == 'yaani'){ ddimtext.style.background = 'rgb(15 35 60)'; }
+
+ddimtext.innerHTML = origins_url4;
+//ddimtext.style.backgroundImage = `url('https://www.google.com/s2/favicons?sz=64&domain_url=${url}')`;
+icon.setAttribute('src', `https://www.google.com/s2/favicons?sz=64&domain_url=${url}`);
+}
+}
+}
+
+function random_bg_color() {
+var x = Math.floor(Math.random() * 256);
+var y = Math.floor(Math.random() * 256);
+var z = Math.floor(Math.random() * 256);
+var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+return bgColor;
+}
+
+function newItem(i) {
+if (!allowNew) { allowNew = true; return; }
+let url = prompt(i18n.__('Url Girin: Örnek (google.com)'));
+
+if(!url || url == '') return;
+try { new URL(url) }
+catch (e) {
+try {
+url = 'https://www.' + url;
+new URL(url);
+} catch (e) {
+try {
+url = 'https://' + url;
+new URL(url);
+} catch (e) {
+alert('Geçersiz URL.');
+return;
+}
+}
+}
+
+loadItems[i] = url;
+setItem(items[i], url, i);
+send('newTab', 'saveItem', {id: i, domain: url});
+}
+
+function clearItem(i) {
+allowNew = false;
+loadItems[i] = "";
+setItem(items[i], "", i);
+send('newTab', 'saveItem', {id: i, domain: ""});
+}
+
+function update() {
+for (let i = 0; i < items.length; i++) {
+let item = items[i];
+let url = loadItems[i];
+setItem(item, url, i);
+}
+}
+
+update();
+</script>

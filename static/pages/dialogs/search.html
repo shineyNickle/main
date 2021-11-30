@@ -1,0 +1,232 @@
+<html id="statusonlySearcBar" style="display: none;">
+<head>
+<title>Holla Arama</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<style>
+main {
+height: auto;
+width: 100%;
+flex-direction: column;
+border-radius: var(--border-radius);
+background: var(--background);
+}
+
+button {
+width: 100%;
+height: 35px;
+padding: 20px 25px;
+display: flex;
+flex-direction: row;
+cursor: pointer;
+justify-content: left;
+text-align: left;
+}
+
+button:hover, button:active,
+.suggestionSelected {
+background: var(--nord16);
+color:var(--nord17);
+}
+
+button:hover img, button:active img,
+.suggestionSelected img {
+filter: brightness(0) invert(1);
+}
+
+.selectedd{
+background: var(--searchbarbutton);
+color:white;
+}
+.insearchs {
+width: 16px;
+margin-right: 10px;
+filter: opacity(0.5);
+}
+
+</style>
+</head>
+
+<body>
+<main id="serachkeyins" class="serachkeyins"></main>
+</body>
+<style>
+body, html { background: transparent !important; }
+</style>
+<script>
+let {
+remote,
+ipcRenderer
+} = require('electron');
+
+let results = document.getElementsByTagName('main')[0];
+
+
+var fetchTheme = async () => {
+let theme = ipcRenderer.sendSync('getTheme');
+let existing = document.querySelector('head link[href*="assets://themes"]');
+if (existing) existing.remove();
+if (theme != 'light') document.querySelector("head").innerHTML +=
+`<link rel="stylesheet" href="assets://themes/${ theme }.css">`;
+};
+
+
+
+var fetchAutoCompleteResults = async query => {
+
+setTimeout(() => {
+if(!query){
+document.getElementById('xresult0').innerHTML = '<img class="insearchs" src="assets://images/newtab/search.svg">'+ ipcRenderer.sendSync('getsearchenginenames');
+}
+}, 100);
+
+var request = new XMLHttpRequest();
+request.onreadystatechange = async e => {
+if (request.readyState == 4 && request.status == 200) {
+results.innerHTML = '';
+
+let buttons = document.createElement('button');
+buttons.innerHTML = '<img class="insearchs" src="assets://images/newtab/search.svg">'+query;
+buttons.id = 'xresult0';
+buttons.onclick = async e => {
+send('loadPage', query);
+};
+results.appendChild(buttons);
+
+let values = JSON.parse(request.responseText)[1];
+if (!values) return;
+for (let i = 1; i < (values.length <= 6 ? values.length : 6); i++) {
+let button = document.createElement('button');
+button.innerHTML = '<img class="insearchs" src="assets://images/newtab/search.svg">'+values[i];
+button.id = 'xresult'+i;
+button.onclick = async e => {
+ipcRenderer.send('loadPage', values[i])
+};
+
+results.appendChild(button);
+
+}
+
+
+
+
+
+let counreals = '';
+
+var selectItem = async (item) => {
+itemcche = item;
+
+counreals = 0;
+if(item){
+document.getElementById(item.id).className = 'suggestionSelected';
+}
+
+}
+
+
+selectItem(results.firstChild);
+
+ipcRenderer.on('keyupkin', async (e,c) => { 
+  //  ipcRenderer.removeAllListeners('keyupkin');
+//logKey(e);
+
+
+if (c === 13) {
+if(document.getElementById('xresult'+counreals)){
+document.getElementById('xresult'+counreals).click();
+}
+}
+
+if (c === 40) {
+var tests = counreals+1; 
+if(document.getElementById('xresult'+tests)){ 
+counreals = counreals+1; 
+var bulsss = document.getElementById('xresult'+counreals);
+document.getElementsByClassName("suggestionSelected")[0].className = "";
+bulsss.className = 'suggestionSelected';
+ipcRenderer.send("ckode40", bulsss.innerText);
+}
+} else if (c === 38) {
+var tests = counreals-1;
+if(document.getElementById('xresult'+tests)){
+counreals = counreals-1; 
+var bulsss = document.getElementById('xresult'+counreals);
+document.getElementsByClassName("suggestionSelected")[0].className = "";
+bulsss.className = 'suggestionSelected';
+ipcRenderer.send("ckode38", bulsss.innerText);
+}
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+}
+request.open("GET", `https://ac.duckduckgo.com/ac/?q=${ query }&type=list`, true); // true for asynchronous 
+request.send(null);
+}
+
+/*
+document.addEventListener('keydown', function (e) {
+if (e.which === 40) {
+selectItem(document.getElementById('suggestionSelected').nextElementSibling);
+} else if (e.which === 38) {
+    selectItem(document.getElementById('suggestionSelected').previousElementSibling);
+}
+});
+*/
+
+// document.addEventListener('keyup', doc_keyUp, false);
+
+ipcRenderer.on('update', async (e, text) => {
+var ctrl_ss_statusOnly = ipcRenderer.sendSync('settingsViewStatusSet', 'ss');
+if(ctrl_ss_statusOnly){
+document.getElementById("statusonlySearcBar").style.display = "block";
+fetchTheme();
+fetchAutoCompleteResults(text);
+} else { document.getElementById("statusonlySearcBar").style.display = "none"; }
+});
+</script>
+
+<script>
+let nums = 0;
+/*
+ipcRenderer.on('keyupkin', async (e) => {
+//logKey(e);
+});
+*/
+
+function logKey(ecode) {
+document.getElementById('xresult'+0).innerHTML = 'sas';
+if(ecode == 'ArrowUp'){
+
+if(nums <= 0){} else { nums--; }
+console.log(nums);
+if(document.getElementById('xresult'+nums)){ 
+document.getElementById('xresult'+nums).focus(); 
+document.getElementById('xresult'+nums).select(); 
+}
+}
+
+if(ecode == 'ArrowDown'){
+if(nums >= 6){} else { nums++; }
+console.log(nums);
+document.getElementById('xresult'+nums).focus(); 
+document.getElementById('xresult'+nums).select(); 
+}
+
+}
+</script>
+</html>

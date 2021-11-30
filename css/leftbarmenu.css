@@ -1,0 +1,81 @@
+#menusleftbar {
+background-color: var(--nord5);
+width: 100%;
+height: 100%;
+border-right: solid 1px var(--nord6);
+margin: 0;
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+z-index: 99999999999;
+width: 39.4px;
+display: block !important;
+-webkit-app-region: no-drag;
+}
+
+.activebtns .real-iconss {
+border: solid 2px var(--nord0);
+border-radius: 50px;
+background: var(--nord0);}
+
+#menu-items {
+padding: 6px 0;
+height: 100%;
+/*display: grid;*/
+padding-left: 2px;
+overflow: auto;
+-webkit-app-region: no-drag;
+}
+
+#menu-items::-webkit-scrollbar{  
+width:0px;  
+background-color: transparent;  
+} 
+
+#menu-items button { 
+padding: 7px 3px 3px 2px;
+width: 36px;
+height: 36px;
+text-align: left;
+align-items: center;
+justify-content: left;
+margin-bottom: 6px;
+margin-top: 6px;
+text-align: center;
+display: initial;
+border-radius: 50px;
+opacity: 0.85;
+-webkit-app-region: no-drag;
+}
+#menu-items button:hover { background-color: var(--nord6) !important; opacity: 1; }
+
+#menu-items img, #info-perm img {
+width: 20px;
+height: 20px;
+-webkit-app-region: no-drag;
+}
+
+#speact {
+margin: 6px 0;
+background: none;
+color: initial;
+height: 1px;
+background: var(--nord6);
+border: none;
+-webkit-app-region: no-drag;
+}
+
+/*#titlebar, #navbar, */
+.ntabsedits, #plugingoreas, .newBookmarksAlss {
+padding-left: 40px;
+}
+/*
+#titlebar {
+width: 98% !important;
+}
+
+
+#navbar {
+width: 97.7% !important;
+}*/

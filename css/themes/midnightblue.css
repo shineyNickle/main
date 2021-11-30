@@ -1,0 +1,45 @@
+/* NORD */
+
+:root {
+/*Yazı*/
+--nord0: #fbfbfb;
+
+
+--nord1: #3b4252;
+
+
+/*Border*/
+--nord2: #6A7377;
+
+--nord3: #4c566a;
+
+
+/*header üst*/
+--nord4: #2B373D;
+/*nav - alt*/
+--nord5: #445760;
+/*div nav-center arama*/
+--nord6: #38454C;
+
+
+--nord7: #8fbcbb;
+--nord8: #88c0d0;
+--nord9: #81a1c1;
+--nord10: #5e81ac;
+--nord11: #bf616a;
+--nord12: #d08770;
+--nord13: #ebcb8b;
+--nord14: #a3be8c;
+--nord15: #b48ead;
+}
+
+/*karanlık renkler için icon aydınlatma*/
+.tab-close {
+filter: brightness(0) invert(1);
+}
+
+#back, #forward, #refresh, #home, #site-info img, #bookmark, #shield, #menu, #system_update, #new-tab, #window-controls svg, #BookMarks img {
+filter: brightness(0) invert(1);
+}
+
+.serachkeyins .insearchs, .xsvg-iconsss {filter: brightness(0) invert(1);}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="darknoneMenu">
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+font-family: 'Roboto', sans-serif !important;
+}
+</style>
+<meta charset="utf-8">
+<title>Menü</title>
+<style>
+* { overflow: hidden !important; }
+html, body { margin: 0; padding: 0; width: 100%; background: none !important; }
+#menus {
+background-color: #ffffff;
+width: 90%;
+height: auto;
+border: solid 1px rgb(218 220 224 / 43%);
+border-radius: 5px;
+box-shadow: 0px 0px 10px -5px rgb(0 0 0 / 37%);
+box-shadow: 0px 5px 9px -2px rgb(0 0 0 / 59%);
+margin: 10px;
+}
+
+#menu-items { padding: 6px 0; }
+
+#menu-items button { 
+padding: 10px 15px;
+width: 100%;
+text-align: left;
+align-items: center;
+justify-content: left;
+font-size: 14px;
+}
+#menu-items button:hover { background-color: #f3f3f3 !important; }
+
+#menu-items img, #info-perm img {
+margin-right: 13px;
+opacity: 0.75;
+width: 100%;
+max-width: 18px;
+filter: brightness(0);
+}
+#speact {
+margin: 6px 0;
+background: none;
+color: initial;
+height: 1px;
+background: #e2e2e2;
+border: none;
+}
+.menuknrol1{width: 80%;}
+.menuknrol2{width: 20%;font-size: 11px;}
+
+
+button:disabled,
+button[disabled]{
+opacity: 0.5;
+}
+</style>
+</head>
+<body class="darknoneMenu">
+<div id="menus" class="moduleMenuPopps">
+<div class="menu-items" id="menu-items">
+<!--<button onclick="window.close()" id="info-close">×</button>-->
+<button id="menu1" class="menu1 i18n" title="Yeni Sekme" onclick="newWinOpenTabs()">
+<img class="svg-iconsss" src="../../../../images/menu/yeni-sekme.svg">
+<p class="menuknrol1"><i18n>Yeni Sekme</i18n></p>
+<p class="menuknrol2">ctrl + t</p>
+</button>
+
+<button id="menu2" class="menu2 i18n" title="Yeni Pencere" onclick="newWindowsOpens()">
+<img class="svg-iconsss" src="../../../../images/menu/yeni-pencere.svg">
+<p class="menuknrol1"><i18n>Yeni Pencere</i18n></p>
+<p class="menuknrol2">ctrl + n</p>
+</button>
+
+<button id="menu3" class="menu3 i18n" title="Yeni Gizli Pencere" onclick="newWindowsOpensHiddens()">
+<img class="svg-iconsss" src="../../../../images/menu/gizli-pencere.svg">
+<p class="menuknrol1" style="width: 73%"><i18n>Yeni Gizli Pencere</i18n></p>
+<p class="menuknrol2" style="width: 27%; font-size: 8.6px;">ctrl + shift + n</p>
+</button>
+
+<hr class="speact" id="speact">
+
+<button id="menu4" class="menu4 i18n" title="Geçmiş" onclick="newWinOpenHistory()">
+<img class="svg-iconsss" src="../../../../images/menu/gecmis.svg">
+<p class="menuknrol1"><i18n>Geçmiş</i18n></p>
+<p class="menuknrol2">ctrl + h</p>
+</button>
+
+<button id="menu4" class="menu4 i18n" title="Kitaplık" onclick="newWinOpenBookMarks()">
+<img class="svg-iconsss" src="../../../../images/menu/kaydedilenler.svg">
+<p class="menuknrol1"><i18n>Kitaplık</i18n></p>
+<p class="menuknrol2">ctrl + b</p>
+</button>
+
+<button id="menu4" class="menu4 i18n" title="İndirilenler" onclick="newWinOpenDowloand()">
+<img class="svg-iconsss" src="../../../../images/menu/indirilenler.svg">
+<p><i18n>İndirilenler</i18n></p>
+</button>
+
+<hr class="speact" id="speact">
+
+<button id="menu5" class="menu5 i18n" title="Hakkında" onclick="newWinOpenHakkinda()">
+<img class="svg-iconsss" src="../../../../images/menu/hakkinda.svg">
+<p><i18n>Hakkında</i18n></p>
+</button>
+
+<button id="menu6" class="menu6 i18n" title="Ayarlar" onclick="newWinOpenSettings()">
+<img class="svg-iconsss" src="../../../../images/menu/ayarlar.svg">
+<p><i18n>Ayarlar</i18n></p>
+</button>
+
+<hr class="speact" id="speact">
+
+<button id="menu7" class="menu7 i18n" title="Çıkış" onclick="newWinOpenExits()">
+<img class="svg-iconsss" src="../../../../images/menu/cikis.svg">
+<p><i18n>Çıkış</i18n></p>
+</button>
+
+<!--
+<button id="menu8" class="menu8" title="menu8" onclick="menu8()">
+<img class="svg-iconsss" src="../../../../images/update_white.svg">
+<p>menu8</p>
+</button>
+-->
+</div>
+</div>
+</body>
+<script>
+let { ipcRenderer, remote } = require('electron');
+//var i18n = new(require('./../../../../translations/i18n-ex'));
+var i18n = new(require('./../../../../translations/i18n'));
+
+window.addEventListener('load', async e => {
+
+//Dil Çeviri Yap
+var i18nTitle = document.getElementById("i18n");
+if(i18nTitle){ i18nTitle.innerHTML = i18n.__(i18nTitle.innerHTML); }
+
+[].forEach.call(document.getElementsByClassName("i18n"),function(el){ 
+if(el.placeholder){ el.placeholder = i18n.__(el.placeholder); }
+if(el.title){ el.title = i18n.__(el.title); }
+});
+
+[].forEach.call(document.getElementsByTagName("i18n"),function(el){ 
+var keyslo = el.innerHTML;
+el.innerHTML = i18n.__(keyslo);
+el.style.display = 'block';
+});
+
+});
+
+</script>
+<script src="assets://js/page/modals/genel.js"></script>
+<script type="text/javascript">
+/* Tema Çek Yükle */
+function xloadThemes(){
+const theme = ipcRenderer.sendSync('getTheme');
+if(theme){ themeObj = theme.toLowerCase(); }/*
+if (document.querySelector('head link[href*="assets://themes"]')) document.querySelector('head link[href*="assets://themes"]').remove();
+document.head.innerHTML += '<link rel="stylesheet" href="assets://themes/'+themeObj+'.css">';*/
+}
+xloadThemes();
+/* Tema Çek Yükle Son */
+
+function message(txt) { ipcRenderer.send('siteInfo', txt); }
+
+function newWindowsOpens(){
+closedNowWidows();
+ipcRenderer.send('newWindowsOpens');
+}
+
+function newWinOpenTabs(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenTabs');
+}
+
+function newWinOpenSettings(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenSettings');
+}
+
+function newWinOpenHistory(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenHistory');
+}
+
+function newWinOpenBookMarks(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenBookMarks');
+}
+
+function newWinOpenHakkinda(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenHakkinda');
+}
+
+function newWinOpenExits(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenExits');
+}
+
+
+function newWinOpenDowloand(){
+closedNowWidows();
+ipcRenderer.send('newWinOpenDowloand');
+}
+
+function newWindowsOpensHiddens(){
+closedNowWidows(); 
+ipcRenderer.send('newIncognitoWindowsOpens');
+}
+
+function closedNowWidows(){
+setTimeout(() => {
+window.close();
+}, 300);
+}
+</script>
+</html>

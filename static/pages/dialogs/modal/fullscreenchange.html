@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title>fullscreen</title>
+<style>
+* { overflow: hidden !important; background: transparent;}
+html, body { margin: 0; padding: 0; width: 100%; background: transparent !important; background-color: transparent !important; }
+#fullscreen{font-family: verdana;width: 100%;text-align: center;max-width: 290px;padding: 10px 3px;background: rgb(0 0 0 / 47%);color: white;font-size: 12px;border-radius: 5px; }
+.esc{font-size: 11px;display: inline-flex;border: solid 1px white;border-radius: 5px;padding: 8px;margin: 0 10px;color: white;}
+#fullscreen i18n{font-size: 14px;color: white;}
+</style>
+</head>
+<body>
+<div id="fullscreen">
+<i18n>Tam ekrandan çıkmak için ESC tuşuna basın</i18n>
+</div>
+</body>
+<script>
+let { ipcRenderer, remote } = require('electron');
+var i18n = new(require('./../../../../translations/i18n'));
+
+window.addEventListener('load', async e => {
+
+//Dil Çeviri Yap
+var i18nTitle = document.getElementById("i18n");
+if(i18nTitle){ i18nTitle.innerHTML = i18n.__(i18nTitle.innerHTML); }
+
+[].forEach.call(document.getElementsByClassName("i18n"),function(el){ 
+if(el.placeholder){ el.placeholder = i18n.__(el.placeholder); }
+if(el.title){ el.title = i18n.__(el.title); }
+});
+
+[].forEach.call(document.getElementsByTagName("i18n"),function(el){ 
+var keyslo = el.innerHTML;
+el.innerHTML = i18n.__(keyslo);
+el.style.display = 'block';
+});
+
+});
+
+//setTimeout(() => {window.close();}, 3000);
+</script>
+</html>

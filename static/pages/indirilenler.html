@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<link href="assets://css/settings/style.css" rel="stylesheet" type="text/css">
+<link href="assets://css/settings/history.css" rel="stylesheet" type="text/css">
+<style>
+.newwarulrkll {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+color: #949494;
+font-size: 12px;
+}
+.failed .NuyOs, .cancel-download .NuyOs, .delete .NuyOs {
+opacity: 0.4;
+text-decoration: line-through;
+}
+
+.progressbar {
+width: 100%;
+background: transparent;
+}
+
+.progressbar > div {
+width: 0%;
+background-color: #FFD563;
+height: 2px;
+}
+</style>
+<meta charset="UTF-8">
+<title id="i18n">İndirilenler</title>
+</head>
+<body>
+<div id="app">
+<div class="sc-1o7hk0x gOQaAa">
+
+<!-- Menu Sol Küçük -->
+<div class="sc-1f9mk16 dfMUNM" id="left-menu"></div>
+<!-- Menu Sol Küçük Son -->
+
+<!-- Menu Geniş -->
+<div class="sc-1f9mk16 gOLKFX">
+<div class="sc-ptdg07 cOvSWp">
+<div class="sc-8qaosi czNvYA"><i18n>İndirilenler</i18n></div>
+</div>
+
+<div class="sc-1ebm0ba gCGCsC" id="addSearch"><input placeholder="Ara" onkeyup="AramaFunc('all',this.value)" id="myInput" class="sc-10jmobs cQunvi i18n"></div>
+
+<div class="sc-f9ba9e bNoKEx" id="solmenus">
+
+<div title="Hepsi" class="sc-1klqouq bECQfp bEUiyY nbuttonload i18n" id="content-tabs-1" onclick="ProssCoun2('all',''), resetLoadedItems()">
+<div id="content-tabs-1" class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/widget.svg);"></div>
+<i18n id="content-tabs-1">Hepsi</i18n>
+</div>
+
+<div title="Bugün" class="sc-1klqouq bECQfp nbuttonload i18n" id="content-tabs-2" onclick="ProssCoun2('today',''), resetLoadedItems()">
+<div id="content-tabs-2" class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/today.svg);"></div>
+<i18n id="content-tabs-2">Bugün</i18n>
+</div>
+
+<div title="Dün" class="sc-1klqouq bECQfp nbuttonload i18n" id="content-tabs-3" onclick="ProssCoun2('yesterday',''), resetLoadedItems()">
+<div id="content-tabs-3" class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/history.svg);"></div>
+<i18n id="content-tabs-3">Dün</i18n>
+</div>
+
+<div title="Geçen Hafta" class="sc-1klqouq bECQfp nbuttonload i18n" id="content-tabs-4" onclick="ProssCoun2('last-week',''), resetLoadedItems()">
+<div id="content-tabs-4" class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/last-week.svg);"></div>
+<i18n id="content-tabs-4">Geçen Hafta</i18n>
+</div>
+
+<div title="Geçen Ay" class="sc-1klqouq bECQfp nbuttonload i18n" id="content-tabs-5" onclick="ProssCoun2('last-month',''), resetLoadedItems()">
+<div id="content-tabs-5" class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/last-month.svg);"></div>
+<i18n id="content-tabs-5">Geçen Ay</i18n>
+</div>
+
+<div title="Daha Eski" class="sc-1klqouq bECQfp nbuttonload i18n" id="content-tabs-6" onclick="ProssCoun2('older',''), resetLoadedItems()">
+<div id="content-tabs-6" class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/older.svg);"></div>
+<i18n id="content-tabs-6">Daha Eski</i18n>
+</div>
+
+<div style="flex: 1 1 0%;"></div>
+
+<div title="Tüm kayıtları temizle" id="clear" class="sc-1klqouq bECQfp i18n">
+<div class="sc-lt5gah heosCI" style="background-image: url(assets://images/settings/clear.svg);"></div>
+<i18n>Tüm kayıtları temizle</i18n>
+</div>
+
+</div>
+</div>
+<!-- Menu Geniş Son -->
+
+<!-- Geçmiş Listesi Bölümü 1 -->
+<div class="sc-chz44j gKsQAm newHistoryPages" id="newHistoryPagesID" onscroll="scrollLoadDatas()">
+<div class="sc-frx3vm kTSEYd" style="margin: 32px 64px;">
+
+<!--
+<div class="sc-15zdws3 jeDgJp">
+<div class="sc-17n7wos cxpScZ">0 Seçili</div>
+<div class="sc-5qs70l hHaCuz button" style="margin-left: 16px; color: white;">
+<div class="sc-13ipnbd bTsMmS">Sil</div>
+</div>
+<div class="sc-5qs70l kKNLJI button" style="margin-left: 8px;">
+<div class="sc-13ipnbd bTsMmS">İptal</div>
+</div>
+</div>
+-->
+
+<div id="list"></div>
+<div id="nothing-here" style="display: none;" class="sc-goxci2 hjjcXz">
+<div class="sc-zwakic kdfNg"><i18n>İndirilen Bir İçerik Yok</i18n></div>
+<div class="sc-1bmyqzo heDebU"><i18n>Henüz bir içerik indirilmemiş.</i18n></div>
+</div>
+
+</div>
+</div>
+<!-- Geçmiş Listesi Bölümü 1 Son -->
+
+</div>
+</div>
+
+<div style="-webkit-app-region: no-drag;"></div>
+<script src="assets://js/page/settings/left-menu.js"></script>
+<script src="assets://js/page/settings/downloads.js"></script>
+</body>
+</html>

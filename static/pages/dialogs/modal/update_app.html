@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title></title>
+<style>
+* { overflow: hidden !important; }
+html, body { margin: 0; padding: 0; width: 100%; background: none !important; }
+#site-info {
+box-shadow: 0 1px 5px 1px #00000063;
+background-color: #292A2D;
+background-color: #F44336;
+background-color: #7289DA;
+background-image:url(assets://modal/bg3.svg);
+background-size:100%;
+color: white !important;
+border-radius: 3px;
+
+z-index: 10;
+position: absolute;
+top: 0px;
+left: 0px;
+margin: 0px;
+width: 320px;
+height: auto;
+
+padding: 22px 15px;
+box-sizing: border-box;
+}
+
+#info-permissions {
+display: flex;
+flex-direction: column;
+height: auto;
+margin-top: 15px;
+padding-top: 0px;
+}
+
+#info-close {
+position: absolute;
+right: 4px;
+top: 4px;
+background: transparent;
+color: white;
+border: none;
+font-size: 20px;
+padding: 1px 7px;
+box-sizing: border-box;
+border-radius: 20px;
+}
+
+#info-header h2, #info-header h2 i18n {
+color: #81C995;
+color: white;
+font-weight: 500;
+font-size: 15px;
+font-weight: 500;
+}
+
+#info-header h3, #info-header h3 i18n {
+font-size: 13px;
+opacity: 0.8;
+color: white;
+margin-top: 10px;
+letter-spacing: -0.25px;
+line-height: 20px;
+font-weight: 400;
+}
+
+#info-header h4, #info-header h4 i18n {
+color: #FFD563;
+margin-top: 7px;
+font-size: 13px;
+font-weight: 500;
+}
+
+#info-header h4:hover, #info-header h4 i18n:hover { cursor: pointer; }
+#info-close:hover { background: rgba(255,255,255,0.075) !important; }
+
+#info-buttons {
+display: flex;
+flex-direction: column;
+height: 100px;
+margin-top: 15px;
+border-top: 1px solid #ffffff29;
+padding-top: 5px;
+}
+
+#info-buttons button, #info-perm {
+padding: 0px;
+background: none;
+border: none;
+display: inline-flex;
+align-items: center;
+flex-grow: 1;
+}
+
+#info-buttons button:hover { background: rgba(255,255,255,0.075); }
+
+#info-buttons img, #info-perm img {
+margin-right: 10px;
+opacity: 0.75;
+width: 100%;
+max-width: 20px;
+}
+
+#info-buttons p, #info-buttons label, #info-perm p, #info-buttons p i18n, #info-buttons label i18n, #info-perm p i18n { color: white; }
+
+#info-buttons p, #info-perm p, #info-buttons p i18n, #info-perm p i18n {
+opacity: 0.85;
+font-size: 13px;
+}
+
+#info-buttons label, #info-buttons label i18n {
+margin-left: 7px;
+font-size: 12px;
+opacity: 0.5;
+}
+
+#info-perm { height: 35px; }
+
+#perm-allow {
+background: rgba(0,0,0,0.35);
+color: white;
+border: none;
+padding: 7px 15px;
+border-radius: 3px;
+position: absolute;
+right: 25px;
+width: 80px;
+text-align: left;
+}
+</style>
+</head>
+<body>
+<div id="site-info">
+<button onclick="window.close()" id="info-close">×</button>
+<div id="info-header">
+<h2 id="mainMetin"><i18n>Yeni Güncelleme Mevcut !</i18n></h2>
+<h3 id="subMetin"></h3>
+<h4 onclick="message('realseUpdateInfo')" id="moreRealseInfos"><i18n>Daha fazla bilgi edin</i18n></h4>
+</div>
+<ul id="info-permissions"></ul>
+<div id="info-buttons">
+
+<button id="installnow" title="Şimdi Güncelle - İndir" class="i18n" onclick="installNow()">
+<img class="svg-iconsss" src="../../../../images/update_white.svg">
+<p><i18n>Şimdi Güncelle - İndir</i18n></p>
+</button>
+
+<button id="restartApp" style="display: none;" class="i18n" title="Şimdi Yeniden Başlat - Kur" onclick="restartApp()">
+<img class="svg-iconsss" src="../../../../images/update_white.svg">
+<p><i18n>Şimdi Yeniden Başlat - Kur</i18n></p>
+</button>
+
+<button id="dowloaders" style="display: none;" class="i18n" title="İndiriliyor Lütfen Bekle" onclick="loader()">
+<img class="svg-iconsss" src="../../../../images/loader.svg">
+<p><i18n>İndiriliyor Lütfen Bekle</i18n></p>
+</button>
+
+<button id="laterSetupss" title="Daha Sonra Hatırlat" class="i18n" onclick="dontInstallLater()">
+<img class="svg-iconsss" src="../../../../images/update_disabled_white.svg">
+<p><i18n>Daha Sonra Hatırlat</i18n></p>
+</button>
+</div>
+</div>
+</body>
+<script>
+let { ipcRenderer, remote } = require('electron');
+var i18n = new(require('./../../../../translations/i18n-ex'));
+</script>
+<script src="assets://js/page/modals/genel.js"></script>
+<script type="text/javascript">
+function message(txt) { ipcRenderer.send('siteInfo', txt); }
+
+var fec_au_releaseInfo = ipcRenderer.sendSync('st_au_releaseInfo');
+
+if(fec_au_releaseInfo){
+//JSON.stringify(fec_au_releaseInfo)
+document.getElementById("subMetin").innerHTML = i18n.__('Yeni Sürüm:')+' ' + fec_au_releaseInfo.version;
+}
+
+function getLoadCacheLog(){
+var fec_au_app_download = ipcRenderer.sendSync('st_au_app_download');
+var fec_update_downloaded = ipcRenderer.sendSync('st_update_downloaded');
+
+if(fec_au_app_download){ 
+document.getElementById("installnow").style.display = "none";
+document.getElementById("laterSetupss").style.display = "none";
+document.getElementById("dowloaders").style.display = "inline-flex";
+}
+
+if(fec_update_downloaded){ 
+document.getElementById("installnow").style.display = "none";
+document.getElementById("dowloaders").style.display = "none";
+document.getElementById("laterSetupss").style.display = "none";
+document.getElementById("restartApp").style.display = "inline-flex";
+}
+}
+
+getLoadCacheLog();
+setInterval(function(){ if(document.getElementById("restartApp").style.display != "inline-flex"){ getLoadCacheLog();} }, 3000);
+
+
+function installNow(){
+document.getElementById("installnow").style.display = "none";
+document.getElementById("laterSetupss").style.display = "none";
+document.getElementById("dowloaders").style.display = "inline-flex";
+ipcRenderer.send('au_app_download');
+}
+
+function loader(){
+}
+
+function restartApp(){
+document.getElementById("installnow").style.display = "none";
+document.getElementById("dowloaders").style.display = "none";
+document.getElementById("laterSetupss").style.display = "none";
+ipcRenderer.send('au_app_install_reset');
+}
+
+function dontInstallLater(){
+window.close();
+}
+</script>
+</html>

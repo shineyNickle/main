@@ -1,0 +1,17 @@
+/* NORD */
+
+:root {
+/*Yazı*/
+--nord0: #000;
+
+/*Border*/
+--nord2: #faebd7;
+
+/*header üst*/
+--nord4: #F6D5E5;
+/*nav - alt*/
+--nord5: #fff;
+/*div nav-center arama*/
+--nord6: #E1E1E2;
+
+}

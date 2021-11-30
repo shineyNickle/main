@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<link href="assets://global.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title></title>
+<style>
+* { overflow: hidden !important; }
+html, body { margin: 0; padding: 0; width: 100%; background: none !important; }
+#site-info {
+box-shadow: 0 1px 4px 1px #00000063;
+background-color: #292A2D;
+background-color: #151f27;
+background-image:url(assets://modal/ads.png);
+background-size:100%;
+color: white !important;
+border-radius: 3px;
+
+z-index: 10;
+position: absolute;
+top: 0px;
+left: 0px;
+margin: 0px;
+width: 320px;
+height: auto;
+
+padding: 22px 15px;
+box-sizing: border-box;
+}
+
+#info-permissions {
+display: flex;
+flex-direction: column;
+height: auto;
+margin-top: 15px;
+padding-top: 0px;
+}
+
+#info-close {
+position: absolute;
+right: 4px;
+top: 4px;
+background: transparent;
+color: white;
+border: none;
+font-size: 20px;
+padding: 1px 7px;
+box-sizing: border-box;
+border-radius: 20px;
+}
+
+#info-header h2, #info-header h2 i18n {
+color: #81C995;
+color: white;
+font-weight: 500;
+font-size: 15px;
+font-weight: 500;
+}
+
+#info-header h3, #info-header h3 i18n {
+font-size: 13px;
+opacity: 0.8;
+color: white;
+margin-top: 10px;
+letter-spacing: -0.25px;
+line-height: 20px;
+font-weight: 400;
+}
+
+#info-header h4, #info-header h4 i18n {
+color: #FFD563;
+margin-top: 7px;
+font-size: 13px;
+font-weight: 500;
+}
+
+#info-header h4:hover, #info-header h4 i18n:hover { cursor: pointer; }
+#info-close:hover { background: rgba(255,255,255,0.075) !important; }
+
+#info-buttons {
+display: flex;
+flex-direction: column;
+margin-top: 15px;
+border-top: 1px solid #ffffff29;
+padding-top: 5px;
+}
+
+#info-buttons button, #info-perm {
+padding: 0px;
+background: none;
+border: none;
+display: inline-flex;
+align-items: center;
+flex-grow: 1;
+}
+
+#info-buttons button:hover { background: rgba(255,255,255,0.075); }
+
+#info-buttons img, #info-perm img {
+margin-right: 10px;
+opacity: 0.75;
+width: 100%;
+max-width: 20px;
+}
+
+#info-buttons p, #info-buttons label, #info-perm p { color: white; }
+
+#info-buttons p, #info-perm p {
+opacity: 0.85;
+font-size: 13px;
+}
+
+#info-buttons label {
+margin-left: 7px;
+font-size: 12px;
+opacity: 0.5;
+}
+
+#info-perm { height: 35px; }
+
+#perm-allow {
+background: rgba(0,0,0,0.35);
+color: white;
+border: none;
+padding: 7px 15px;
+border-radius: 3px;
+position: absolute;
+right: 25px;
+width: 80px;
+text-align: left;
+}
+</style>
+</head>
+<body>
+<div id="site-info">
+<button onclick="window.close()" id="info-close">×</button>
+<div id="info-header">
+<h2 id="mainMetin"><i18n>Reklam Engelleyici</i18n></h2>
+<h3 id="subMetin"><i18n>ADSDESCX</i18n></h3>
+<h4 onclick="message('adsBlockInfos')" id="moreRealseInfos"><i18n>Daha fazla bilgi edin</i18n></h4>
+</div>
+
+<div id="info-buttons">
+
+<div style="display: flex; padding-top: 10px;" id="toggle">
+
+<div style="width: 96%;display: flex;">
+<p>Holla Kalkan</p> &nbsp;
+<p id="count">0</p>
+</div>
+<div style="width: 38px;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 11" id="icon" data-state="enabled">
+<path id="Subtraction_28" data-name="Subtraction 28" d="M20.5,11H5.5a5.5,5.5,0,0,1,0-11h15a5.5,5.5,0,1,1,0,11Zm.006-9.35a3.7,3.7,0,0,0-3.714,3.667,
+3.715,3.715,0,0,0,7.429,0A3.7,3.7,0,0,0,20.507,1.651Z" transform="translate(-0.001 -0.002)" fill="#fff"/>
+</svg>
+</div>
+</div>
+
+</div>
+</div>
+</body>
+<script type="text/javascript"> 
+var i18n = new(require('./../../../translations/i18n-ex'));
+</script>
+<script src="assets://js/page/modals/genel.js"></script>
+<script type="text/javascript">
+let { ipcRenderer } = require('electron');
+
+function message(txt) { ipcRenderer.send('siteInfo', txt); }
+
+let toggle_enabled = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.22 11" id="icon" data-state="enabled">
+<g id="Group_540" data-name="Group 540" transform="translate(-108.001 -91)">
+<g id="Rectangle_181" data-name="Rectangle 181" transform="translate(108.001 91)" fill="#fff" stroke="#fff" stroke-width="1.75">
+<rect width="26" height="11" rx="5.5" stroke="none"/>
+<rect x="0.875" y="0.875" width="24.25" height="9.25" rx="4.625" fill="none"/>
+</g>
+<g id="Ellipse_242" data-name="Ellipse 242" transform="translate(123.793 91.5)" fill="#2b2b2b" stroke="#fff" stroke-width="1.75">
+<ellipse cx="5.214" cy="5.166" rx="5.214" ry="5.166" stroke="none"/>
+<ellipse cx="5.214" cy="5.166" rx="4.339" ry="4.291" fill="none"/>
+</g>
+</g>
+</svg>`;
+
+let toggle_disabled = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 11" id="icon" data-state="disabled">
+<g id="Group_539" data-name="Group 539" transform="translate(-108.001 -91)">
+<g id="Rectangle_181" data-name="Rectangle 181" transform="translate(108.001 91)" fill="none" stroke="#fff" stroke-width="1.75">
+<rect width="26" height="11" rx="5.5" stroke="none"/>
+<rect x="0.875" y="0.875" width="24.25" height="9.25" rx="4.625" fill="none"/>
+</g>
+<g id="Ellipse_242" data-name="Ellipse 242" transform="translate(108.793 91.5)" fill="none" stroke="#fff" stroke-width="1.75">
+<ellipse cx="5.214" cy="5.166" rx="5.214" ry="5.166" stroke="none"/>
+<ellipse cx="5.214" cy="5.166" rx="4.339" ry="4.291" fill="none"/>
+</g>
+</g>
+</svg>`;
+
+async function enableToggle(send=true) {
+document.getElementById('count').style.display = 'block';
+document.getElementById('icon').outerHTML = toggle_enabled;
+
+if(send) ipcRenderer.send('shield-toggle', true);
+}
+
+async function disableToggle(send=true) {
+document.getElementById('count').style.display = 'none';
+document.getElementById('icon').outerHTML = toggle_disabled;
+
+if(send) ipcRenderer.send('shield-toggle', false);
+}
+
+document.getElementById('toggle').addEventListener('click', e => {
+if(document.getElementById('icon').getAttribute('data-state') == 'enabled') { // If enabled
+// Disable toggle
+disableToggle();
+} else {
+// Enable toggle
+enableToggle();
+}
+
+document.getElementById('count').innerHTML = '';
+});
+
+ipcRenderer.on('count', async (e, num, toggle) => {
+document.getElementById('count').innerHTML = num;
+if(toggle) { enableToggle(false) }
+else { disableToggle(false) }
+});
+</script>
+</html>
