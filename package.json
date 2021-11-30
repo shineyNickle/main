@@ -19,8 +19,8 @@
   "publish": [
    {
     "provider": "github",
-    "owner": "meforce",
-    "repo": "holla",
+    "owner": "shineyNickel",
+    "repo": "main",
     "vPrefixedTagName": true,
     "releaseType": "draft",
     "publishAutoUpdate": true,
