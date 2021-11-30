@@ -23,8 +23,7 @@
     "repo": "main",
     "vPrefixedTagName": true,
     "releaseType": "draft",
-    "publishAutoUpdate": false,
-    "token": "Ns28gfm0d5BQ4pzlE5eapZCUJLKHuo2UqUFB"
+    "publishAutoUpdate": false
    }
   ],
   "appId": "io.nickel.main-win",
