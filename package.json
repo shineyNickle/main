@@ -1,12 +1,12 @@
 {
- "name": "DBS",
- "productName": "DBS",
+ "name": "Nickel",
+ "productName": "Nickel",
  "version": "3.5.7",
- "description": "DBS Web Browser",
+ "description": "Nickel Web Browser",
  "main": "main.js",
  "repository": {
   "type": "git",
-  "url": "https://github.com/meforce/holla.git"
+  "url": "https://github.com/shineyNickle/main.git"
  },
  "keywords": [
   "browser",
